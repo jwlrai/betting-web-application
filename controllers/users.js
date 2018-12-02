@@ -2,71 +2,49 @@ const express = require('express');
 const route = express.Router();
 const users = require('../modules/m.users');
 const validate = require('../modules/m.validator');
-// const gQur   = require('../models/getQuerys');
 
-route.get('/',(req,res)=>{
-   
-    // apiReq.getCurrentLocation((err,data)=>{
-    //     if(err){
-    //         res.status(500).json({
-    //             "message" : "no data found",
-    //             "status" : "NODATA"
-    //         });
-    //     }
-    //     else{                  
-    //         const currLoc = JSON.parse(data);
-    //         gQur.getRestaurants(currLoc.city.toLowerCase(),req.query.type,(err,getData)=>{
-    //             if(getData.length > 0){
-    //                 let restaurantList = {
-    //                     status:"ok",
-    //                     results:[]
-    //                 };
-    //                 getData.forEach((ele)=>{
-    //                     restaurantList.results = restaurantList.results.concat(ele.data);
-                      
-    //                 });
-    //                 res.json(restaurantList);
-    //             }
-    //             else{
-    //                 apiReq.getRestaurants(currLoc.city.toLowerCase(),currLoc.loc,req.query.type,(err,restaurants)=>{
-    //                     if(err){
-    //                         res.status(500).json({
-    //                             "message" : "no data found",
-    //                             "status" : "NODATA"
-    //                         });
-    //                     }
-    //                     else{
-    //                         res.json(restaurants);
-    //                     }
-    //                 });
-    //             }
-    //         });
-    //     }
-    // });
-});
 
 route.post('/userCreate',(req,res)=>{
-    // name:String,
-    // address:String,
-    // email:String,
-    // phone:String
-    // fund:Number,
-    // password:String,
-    // salt:String,
-    // active:String,
-    if( validate.isEmpty(req.body.name) && validate.isAlphaNumericSpace(req.body.name)) {
-        res.send('valid name')
+    if(res.locals.userData===null){
+        validate.setRules('Name',req.body.name,'alphaNumericSpace','name');
+        validate.setRules('Address',req.body.address,'alphaNumericSpace','address');
+        validate.setRules('email',req.body.email,'email','email');
+        validate.setRules('phone',req.body.phone,'numeric','phone');
+        validate.setRules('password',req.body.password,'istring','password');
+        if(validate.exec()){
+            // console.log(validate.getData());
+            users.userCreate(validate.getData(),function(err,data){
+                if(err){
+                    res.status(500).end();
+                }
+                else{
+                    res.end('sucess');
+                }
+            });
+        }
+        else{
+            res.json(validate.getError()).end();  
+        }
     }
     else{
-        res.send('invalid name')
+        res.status(403).end();
     }
-    if( validate.isEmpty(req.body.address) && validate.isAlphaNumericSpace(req.body.address)) {
-        res.send('valid name')
+    
+});
+route.post('/userValidate',(req,res)=>{
+    if(res.locals.userData===null){
+        users.validateUser(req.body.email,req.body.password,(err,data)=>{
+            if(err){
+                if(err==='invalid') res.status(203).end('invalid username or password');
+                else res.status(500).end();
+            }
+            else{
+                res.set('x-token',data).send('sucess');
+            }
+        });
     }
-    if( validate.isEmpty(req.body.address) && validate.isAlphaNumericSpace(req.body.address)) {
-        res.send('valid name')
+    else{
+        res.status(403).end();
     }
-    return;
-   
 });
 module.exports = route;

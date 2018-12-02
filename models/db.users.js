@@ -11,7 +11,7 @@ const usersSchema = new mongoose.Schema({
     active:String,
     groupId:{
         type: mongoose.Schema.Types.ObjectId,
-        ref:'group'
+        ref:'groups'
     }
 });
 
