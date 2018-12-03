@@ -28,9 +28,9 @@ module.exports = {
             };
         });
     },
-    deleteTeams: function(matchId, cb) {
+    deleteTeams: function(teamId, cb) {
         db.teams.findOneAndRemove({
-            matchId: matchId
+            _id: teamId
         },
         (err, data) => {
             if (err) {

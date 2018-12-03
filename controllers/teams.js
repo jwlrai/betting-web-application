@@ -29,8 +29,8 @@ route.post(`/create`, (req, res) => {
 });
 
 route.delete(`/:teamId`, (req, res) => {
-    const matchId = req.body.matchId;
-    teams.deleteTeams(matchId, (req, res) => {
+    const teamId = req.params.teamId;
+    teams.deleteTeams(teamId, (err, data) => {
         if (err) {
             console.log(err);
         } else {
