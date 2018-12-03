@@ -6,12 +6,12 @@ const betting   = require('./db.betting');
 const league    = require('./db.league');
 const matches   = require('./db.matches');
 const sport     = require('./db.sport');
-const team      = require('./db.team');
+const team      = require('./db.teams');
 const users     = require('./db.users');
 const beggingHistory = require('./db.group');
 
 module.exports = {
-    team    : team,
+    teams   : team,
     users   : users,
     group   : group,
     sport   : sport,

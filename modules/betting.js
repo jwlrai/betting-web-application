@@ -1,4 +1,4 @@
-const db = require(`../models`)
+const db = require(`../models`);
 
 module.exports = {
 
@@ -19,7 +19,17 @@ module.exports = {
                 cb(false, data);
             };
         });
-
-
+    },
+    deletePool: function(matchId, cb) {
+        db.betting.findOneAndRemove({
+            matchId: matchId
+        },
+        (err, data) => {
+            if (err) {
+                cb(err, null);
+            } else {
+                cb(false, data);
+            };
+        });
     }
 };

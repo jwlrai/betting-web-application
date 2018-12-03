@@ -5,12 +5,6 @@ const betting = require(`../modules/betting`);
 
 //make query rules
 
-route.post(`/`, (req, res) => {
-    res.end('inside');
-    console.log(`inside`);
-
-});
-
 route.post(`/create/pool`, (req, res) => {
 
     console.log(`inside`);
@@ -25,6 +19,17 @@ route.post(`/create/pool`, (req, res) => {
         };
     });
 });
+
+route.delete(`/delete/pool`, (req, res) => {
+    const matchId = req.body.matchId;
+    betting.deletePool(matchId, (req, res) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.json(data);
+        }
+    })
+})
 
 
 module.exports = route;
