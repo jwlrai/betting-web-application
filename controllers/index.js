@@ -10,10 +10,10 @@ route.use('/',function(req,res,next){  //routing level middleware
     if(token===undefined){ 
         res.locals.userData = null;
         next();
-    }else{
+    }else{        
         auth.validateToken(token,(err,data)=>{
             if(err ){
-                res.end('tokenExpire');
+                res.status(403).end();
             }
             else{
                res.locals.userData = data;
@@ -25,8 +25,9 @@ route.use('/',function(req,res,next){  //routing level middleware
 
 route.use('/users',users);
 
-route.use('*', function(req, res){
+route.use('*', function(req, res,next){
     res.status(404).end('nodata');
+    
 });
 
 module.exports = route;

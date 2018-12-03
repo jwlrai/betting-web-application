@@ -1,14 +1,14 @@
 module.exports = {
-    rules: [], 
-    errors:[],
-    reqData :{},
+    rules   : [], 
+    errors  : [],
+    reqData : {},
 
     // this function sets the rules 
     // @param 
-    //     name : String , this is the feild descrtion used for error message,
-    //     data : this is query data,
-    //     rules : String, name of the available rules eg: numeric, alphanumericspace.....,
-    //     option : STRING, if this param is set it will set property of an reqData, property name will be this param value and property value will be query data eg : { @option : @data}
+    //     name   : STRING , this is the feild description used for error message,
+    //     data   : this is query data,
+    //     rules  : STRING, name of the available rules eg: numeric, alphanumericspace.....,
+    //     option : STRING, if this param is set it will set property of an reqData, property name will be this param value and property value //  //                   will be query data eg : { @option : @data}
     setRules:function(name,data, rules,option){
        this.rules.push({
            name : name,
@@ -19,13 +19,17 @@ module.exports = {
     },
     getError : function(){     
         const err = this.errors;
-        this.errors = [];
+        
         return err;
     },
-    
+    resetValidation : function(){
+        this.errors = [];
+        this.reqData = {};
+        this.rules = [];
+    },
     getData : function(){
         const data = this.reqData;
-        this.reqData = {};
+        
         return data;
     },
     exec:function(){
@@ -60,26 +64,29 @@ module.exports = {
        return this.errors.length==0;
     },
     alpha : function(data){
+      
         if(typeof(data) !='string') return false;
         return /^[a-zA-Z]+$/.test(data);
     },
     empty: function(data){
-        return data.replace(/\s/g, "")=='';
+        return data.replace(/\s/g, "")==='';
         
     },
     numeric : function(data){
-    
-        return /^[0-9]+$/.test(data);
+        return typeof(data);
+        // return /^[0-9]+$/.test(data);
     },
-    alphanumeric: function(data){
+    alphaNumeric: function(data){
+        
         if(typeof(data)!='string') return false;
+        
         if( this.empty(data) ) return false;
-        return /^[0-9a-z]+$/.test(data);
+        return /^[0-9a-zA-Z]+$/.test(data);
     },
     alphaNumericSpace : function(data){
         if(typeof(data)!='string') return false;
         if( this.empty(data) ) return false;
-        return /^[0-9a-z\s]+$/.test(data);
+        return /^[0-9a-zA-Z\s]+$/.test(data);
     },
     email : function(data){
         if(typeof(data)!='string') return false;

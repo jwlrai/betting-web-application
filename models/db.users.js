@@ -7,8 +7,7 @@ const usersSchema = new mongoose.Schema({
     phone:Number,
     fund:Number,
     password:String,
-    salt:String,
-    active:String,
+    active:Number,
     groupId:{
         type: mongoose.Schema.Types.ObjectId,
         ref:'groups'
