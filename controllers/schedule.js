@@ -41,6 +41,19 @@ route.delete(`/:matchId`, (req, res) => {
     });
 });
 
+route.put(`/edit/:matchId`, (req, res) => {
+    const matchId = req.params.matchId;
+    const dateTime = req.body.dateTime;
+    console.log(dateTime);
+    schedule.editSchedule(matchId, {dateTime: dateTime}, (err, data) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.json(data);
+        };
+    });
+});
+
 
 
 module.exports = route;

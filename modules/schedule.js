@@ -29,7 +29,8 @@ module.exports = {
             };
         });
     },
-    
+
+
     deleteSchedule: function(matchId, cb) {
         db.schedule.findOneAndRemove({
             _id: matchId
@@ -42,5 +43,15 @@ module.exports = {
             };
         });
     },
+
+    editSchedule: function(matchId, dateTime, cb) {
+        db.schedule.findByIdAndUpdate(matchId, dateTime, (err, data) => {
+            if (err) {
+                cb(err, null);
+            } else {
+                cb(false, data);
+            };
+        });
+    }
 
 };
