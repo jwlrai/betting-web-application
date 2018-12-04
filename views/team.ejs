@@ -1,0 +1,82 @@
+<div id="team">
+    <h3>Create Team</h3>
+    <form id="teamform" class="clearFix">
+        <div class="floatLeft">
+            <table>
+                <tr>
+                    <td>Team Name </td>
+                    <td> : <input class="inp" placeholder="" autocomplete="off" type="text" name="name" /></td>
+                </tr>
+                <tr>
+                    <td>Team Image</td>
+                    <td> : <input class="inp" placeholder="" autocomplete="off" type="file" name="image" /></td>
+                </tr>
+            </table>
+              
+        </div>
+        <div class="floatRight">
+            <p>Description</p>
+            <textarea></textarea>
+            <p><input type="reset" value="Reset" class="btn"/> <input type="submit" value="Submit" class="btn btnmain"/></p>
+        </div>
+            
+    </form>
+</div>
+<div id="fild_data" class="clearFix">
+        
+       
+</div>
+<style>
+    #team{
+        margin-top:30px;
+        padding:15px 20px;
+        border:1px solid #bababa;
+        position: relative;
+    }
+    
+    #team h3{
+        position: absolute;
+        top:-9px;
+        left:20px;
+        background-color:white;
+        padding:3px 10px;
+    }
+    #teamform{
+        width:100%;
+    }
+    #teamform div{
+        width:50%;
+    }
+    #teamform > div table{
+        width:100%;
+    }
+    #teamform > div table tr td{
+        padding:3px 0;
+    }
+    #teamform input{
+        padding: .6em 1em;
+        width:90%;
+    }
+    #teamform > div p{
+        margin-bottom:5px;
+    }
+    #teamform div textarea{
+        border-radius: 3px;
+        margin: 0;
+        color: #262728;
+        border: 1px solid #bdc7d8;
+        resize: none;
+        width:100%;
+        height:58px;
+        padding:5px;
+    }
+    #teamform > div p:last-child{
+        margin-top:5px;
+        text-align: right;
+    }
+    #fild_data{
+        border: 1px solid #bababa;
+        padding: 15px;
+        margin-top:25px;
+    }
+</style>

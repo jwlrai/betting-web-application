@@ -4,53 +4,100 @@ const users     = require('../modules/m.users');
 const validate  = require('../modules/m.validator');
 
 
-route.post('/register',(req,res)=>{
+route.get('/p/:pageNo/s/:state',(req,res)=>{
    
-    if(res.locals.userData===null){ // creates user only if its not logedin
-        validate.setRules('Name',req.body.name,'alphaNumericSpace','name');
-        validate.setRules('Address',req.body.address,'alphaNumericSpace','address');
-        validate.setRules('email',req.body.email,'email','email');
-        validate.setRules('phone',req.body.phone,'numeric','phone');
-        validate.setRules('password',req.body.password,'istring','password'); 
-        if(validate.exec()){
-           obj = validate.getData();
-           obj.fund = 0;
-           obj.active = 1;
-            users.userCreate(obj,function(err,data){
-                if(err){
-                    res.status(500).end();
-                }
-                else{
-                    res.end('sucess');
-                }
-            });
+    if(res.locals.userData !== null && res.locals.userData.group =='admin'){
+      
+        const status = {'enable':1,'disable':0};
+        if(status[req.params.state]==undefined){
+            res.status(404).end();
         }
         else{
-            res.json(validate.getError());  
+          
+            users.getUsers(req.params.pageNo,status[req.params.state],function(err,data){
+                if(err){
+                    res.json({"message":"fail"});
+                }else{
+                    res.status(200).json(data)
+                }
+                
+            });
+        }
+        
+    }else{
+        res.status(403).end();
+    }
+});
+route.post('/register',(req,res)=>{
+    if(!req.xhr){
+        if(res.locals.userData===null){ // creates user only if its not logedin
+            validate.setRules('Name',req.body.name,'alphaNumericSpace','name');
+            validate.setRules('Address',req.body.address,'alphaNumericSpace','address');
+            validate.setRules('email',req.body.email,'email','email');
+            validate.setRules('phone',req.body.phone,'numeric','phone');
+            validate.setRules('password',req.body.password,'istring','password'); 
+            if(validate.exec()){
+            obj = validate.getData();
+            obj.fund = 0;
+            obj.active = 1;
+                users.userCreate(obj,function(err,data){
+                    if(err){
+                        res.status(500).end();
+                    }
+                    else{
+                        res.cookie('bettingweb',data, { expires: new Date(Date.now() + 86400000), httpOnly: true,maxAge:86400000 });
+                        res.writeHead(302, {
+                            'Location': '/'
+                        });
+                        res.end();
+                    }
+                });
+            }
+            else{
+                res.json(validate.getError());  
+            }
+        }
+        else{
+            res.writeHead(302, {
+                'Location': '/'
+            });
+            res.end();
         }
     }
     else{
         res.status(403).end();
     }
-    
 });
-//localhost:3000/users/login
+
 route.post('/login',(req,res)=>{ // validate user only if not loged in
-    if(res.locals.userData===null){
-        users.validateUser(req.body.email,req.body.password,(err,data)=>{
-            if(err){
-                if(err==='invalid') res.status(203).end('invalid username or password');
-                else if(err==='disabled') res.status(203).end('user is disabled');
-                else res.status(500).end();
-            }
-            else{
-                res.set('x-token',data).send('sucess');
-            }
-        });
+    if(!req.xhr){
+        if(res.locals.userData===null){
+        
+            users.validateUser(req.body.email,req.body.password,(err,data)=>{
+                if(err){
+                    if(err==='invalid') res.status(203).end('invalid username or password');
+                    else if(err==='disabled') res.status(203).end('user is disabled');
+                    else res.status(500).end();
+                }
+                else{
+                
+                    res.cookie('bettingweb',data, { expires: new Date(Date.now() + 86400000), httpOnly: true,path:'/',maxAge:86400000 });
+                    res.writeHead(302, {
+                        'Location': '/'
+                    });
+                    res.end();
+                }
+            });
+        
+        }
     }
     else{
-        res.status(403).end();
+        res.writeHead(302, {
+            'Location': '/'
+        });
+        res.end();
     }
+   
 });
 
 route.put('/:userid/status/:type',(req,res)=>{
@@ -74,10 +121,10 @@ route.put('/:userid/status/:type',(req,res)=>{
                 });
             }else{
                 console.log(/^[0-9a-zA-Z\s]+$/.test(req.params.userid));
-                res.end('invalid parameter');
+                res.end('invalid');
             }
         }else{
-            res.end('invalid parameter');
+            res.end('invalid');
         }
     }
     else{
@@ -87,7 +134,7 @@ route.put('/:userid/status/:type',(req,res)=>{
 });
 
 route.put('/edit/:type',(req,res)=>{
-    if(res.locals.userData!==null){
+    if(res.locals.userData!==null && res.locals.userData=='user'){
         
         const type = ['password','email','name','address','phone','fund'];
         validate.setRules('',req.params.type,'alpha');   

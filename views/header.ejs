@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+       
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="images/site/favicon.ico">
+    <script
+			  src="https://code.jquery.com/jquery-3.3.1.min.js"
+			  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+              crossorigin="anonymous"></script>
+            
+
+    <link rel="stylesheet" href="http://localhost:3000/style/style.css">
+   
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto|Text+Me+One" rel="stylesheet"> 
+    
+    <title>Betting</title>
+
+</head>
+<body>
+    <header>
+        <div class="container clearFix">
+            <h1 class="floatLeft"><a href="#">BettingWeb</a></h1>
+            <div class="floatRight">
+                <% if(data===null){ %>
+                <form  action="/users/login" method="POST"><input autocomplete="off" required class="inp"  type="email" placeholder="Email" name="email"/><input autocomplete="off" required class="inp" placeholder="Password" type="password" name="password"/>
+                    <button class="btn">Login</button>
+                </form>
+                <% } else { %>
+                    <nav>
+                        <ul>
+                            <% if(data=='admin'){ %>  
+                            <li class="nav-sel"><a href="/page/users">Users</a></li>
+                            <% } %>  
+                            <li 
+                            <% if(data =='user'){ %>  class="nav-sel" <% } %>
+                            ><a href="/page/teams">Team</a></li>
+                            <li><a href="/page/schedules">Schedule</a></li>
+                            <li><a href="/page/bettings">Betting</a></li>
+                            <li><a href="account">Accounts</a>
+                                <ul>
+                                    <li><a href="/logout">Logout</a></li>
+                                    <li><a href="/p/profile">Profile</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                
+                <% } %>
+                
+            </div>
+        </div>
+    </header>

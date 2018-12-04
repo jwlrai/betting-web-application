@@ -4,7 +4,26 @@ const db  = require('../models');
 const auth = require('./m.auth');
 
 module.exports = {
-
+    getUsers : function(offset,status,cb){
+            db.group.find((err,data)=>{
+                if(err){
+                    cb(err,null);
+                }else{
+                    data.forEach((ele)=>{
+                        if(ele.name =='user'){
+                            db.users.find({groupId:ele._id,active:status}).skip(offset*10).limit(10).exec((err,udata)=>{
+                                if(err){
+                                    cb(err,null);
+                                }else{
+                                    cb(false,udata);
+                                }
+                            });
+                        }
+                    });
+                }
+                
+            });
+    },
     userCreate : function(userData,cb){
         bcrypt.hash(userData.password, 10, function(err, hash) {
 
@@ -17,8 +36,14 @@ module.exports = {
                 else{
                     userData.groupId = data[0]._id;
                     
-                    db.users.create(userData,function(err,data){
-                        cb(err, data);
+                    db.users.create(userData,function(err,udata){
+                        if(err){
+                            cb(err,false)
+                        }
+                        else{
+                            cb(err, auth.getToken(udata._id));
+                        }
+                        
                     });   
                 }
             });
@@ -31,24 +56,29 @@ module.exports = {
             if(err){
                 cb(err,null);
             }else{
-               
-                if(data[0].active === 1){
-                    if(data.length > 0){
-                        bcrypt.compare(password, data[0].password, (err, res)=> {
-                            if(err){
-                                cb('invalid',null);
-                            }else{
-    
-                                cb(false,auth.getToken(data[0]._id));
-                            }
-                        });
+                if(data.length > 0){
+                    if(data[0].active === 1){
+                        if(data.length > 0){
+                            bcrypt.compare(password, data[0].password, (err, res)=> {
+                                if(err){
+                                    cb('invalid',null);
+                                }else{        
+                                    cb(false,auth.getToken(data[0]._id));
+                                }
+                            });
+                        }
+                        else{
+                            cb('invalid',null);
+                        }
+                    }else{
+                        cb('disabled',null);
                     }
-                    else{
-                        cb('invalid',null);
-                    }
-                }else{
-                    cb('disabled',null);
                 }
+                else{
+                    cb('invalid',null);
+                }
+              
+                
 
                 
             }

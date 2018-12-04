@@ -15,10 +15,6 @@ const bettingSchema = new mongoose.Schema({
     matchId:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'matches'
-    },
-    leagueId:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'league'
     }
 });
 
