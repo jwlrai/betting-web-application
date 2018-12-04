@@ -8,10 +8,7 @@ const teamSchema = new mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref:'team'
     },
-    leagueId:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'league'
-    }
+   
 });
 
 module.exports = mongoose.model('matches',teamSchema); 
