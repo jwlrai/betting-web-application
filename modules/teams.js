@@ -2,7 +2,7 @@ const db = require(`../models`);
 
 module.exports = {
 
-    getTeams: function(teams, description, imgLink, cb) {
+    getTeams: function(cb) {
         db.teams.find({
         },
         (err, data) => {

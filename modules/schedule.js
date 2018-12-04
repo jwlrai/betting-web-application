@@ -2,10 +2,8 @@ const db = require(`../models`);
 
 module.exports = {
 
-    getSchedule: function(team1, team2, dateTime, location, cb) {
-        db.schedule.find({
-        },
-        (err, data) => {
+    getSchedule: function(cb) {
+        db.schedule.find({}).populate(`team1`).populate(`team2`).exec((err, data) => {
             if (err) {
                 cb(err, null);
             } else {

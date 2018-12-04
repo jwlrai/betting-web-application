@@ -1,7 +1,13 @@
 const mongoose = require(`mongoose`);
 const scheduleSchema = new mongoose.Schema({
-    team1: String,
-    team2: String,
+    team1: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: `team`
+    },
+    team2: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: `team`
+    },
     dateTime: String,
     location: String
 });
