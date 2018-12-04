@@ -30,6 +30,17 @@ route.post(`/create`, (req, res) => {
     });
 });
 
+route.delete(`/:matchId`, (req, res) => {
+    const matchId = req.params.matchId;
+    schedule.deleteSchedule(matchId, (err, data) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.json(data);
+        };
+    });
+});
+
 
 
 module.exports = route;

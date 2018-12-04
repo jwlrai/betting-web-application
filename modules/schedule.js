@@ -1,7 +1,7 @@
 const db = require(`../models`);
 
 module.exports = {
-    
+
     getSchedule: function(team1, team2, dateTime, location, cb) {
         db.schedule.find({
         },
@@ -20,6 +20,19 @@ module.exports = {
             team2: team2,
             dateTime: dateTime,
             location: location
+        },
+        (err, data) => {
+            if (err) {
+                cb(err, null);
+            } else {
+                cb(false, data);
+            };
+        });
+    },
+    
+    deleteSchedule: function(matchId, cb) {
+        db.schedule.findOneAndRemove({
+            _id: matchId
         },
         (err, data) => {
             if (err) {
