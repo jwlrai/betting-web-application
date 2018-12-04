@@ -1,7 +1,18 @@
 const db = require(`../models`);
 
 module.exports = {
-
+    
+    getSchedule: function(team1, team2, dateTime, location, cb) {
+        db.schedule.find({
+        },
+        (err, data) => {
+            if (err) {
+                cb(err, null);
+            } else {
+                cb(false, data);
+            };
+        });
+    },
 
     createSchedule: function(team1, team2, dateTime, location, cb) {
         db.schedule.create({
