@@ -21,7 +21,7 @@ module.exports = {
         });
     },
     deletePool: function(matchId, cb) {
-        db.betting.findOneAndRemove({
+        db.betting.deleteMany({
             matchId: matchId
         },
         (err, data) => {

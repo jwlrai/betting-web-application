@@ -1,7 +1,7 @@
 const express = require(`express`);
 const route = express.Router();
 const teams = require(`../modules/teams`);
-const multer = require(`express`);
+const multer = require(`multer`);
 const storage = multer.diskStorage({
     destination: `./public/images/upload`,
 filename: function(req, file, cb) {

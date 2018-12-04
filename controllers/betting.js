@@ -22,7 +22,8 @@ route.post(`/create/pool`, (req, res) => {
 
 route.delete(`/delete/pool`, (req, res) => {
     const matchId = req.body.matchId;
-    betting.deletePool(matchId, (req, res) => {
+    console.log(matchId);
+    betting.deletePool(matchId, (err, data) => {
         if (err) {
             console.log(err);
         } else {
