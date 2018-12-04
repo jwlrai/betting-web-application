@@ -39,5 +39,28 @@ route.delete(`/:teamId`, (req, res) => {
     });
 });
 
+route.put(`/edit/:teamId`, (req, res) => {
+    console.log(`inside`);
+    const teamId = req.params.teamId;
+    const teamName = req.body.teamName;
+    const description = req.body.description;
+    const updateData = {
+    };
+    if (teamName !== undefined) {
+        updateData.name = teamName;
+    };
+    if (description !== undefined) {
+        updateData.description = description;
+    };
+    console.log(teamId);
+    teams.editTeams(teamId, updateData, (err, data) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.json(data);
+        };
+    });
+})
+
 
 module.exports = route;

@@ -39,5 +39,15 @@ module.exports = {
                 cb(false, data);
             };
         });
+    },
+    editTeams: function(teamId, updateData, cb) {
+        db.teams.findByIdAndUpdate(teamId, updateData,
+        (err, data) => {
+            if (err) {
+                cb(err, null);
+            } else {
+                cb(false, data);
+            };
+        });
     }
 };

@@ -33,3 +33,22 @@ module.exports = {
         });
     }
 };
+
+// from practace
+// editPool: function(oldTeam, newTeam, matchId, cb) {
+//     db.betting.findOneAndUpdate({
+//         matchId: matchId,
+//         teamId: oldTeam,
+//     },
+//     {
+//         teamId: newTeam
+//     }, (err, data) =>{
+//         if (err) {
+//             cb(err, null);
+//         } else {
+//             cb(false, data);
+//         }
+//     }
+//     );
+// },
+//end of from practace

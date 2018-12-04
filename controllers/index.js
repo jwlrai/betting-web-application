@@ -5,6 +5,7 @@ const auth      = require('../modules/m.auth');
 const views     = require('./views');
 const betting   = require('./betting');
 const teams     = require(`./teams`);
+const schedule  = require(`./schedule`);
 
 
 route.use('/',function(req,res,next){  //routing level middleware for authenticating users
@@ -32,6 +33,7 @@ route.use('/',views);
 route.use('/users',users);
 route.use(`/betting`, betting);
 route.use(`/teams`, teams);
+route.use(`/schedule`, schedule);
 // route.use(`/betting`, (req,res,next)=>{
 //     res.send('to betting');
 // });

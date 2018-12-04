@@ -3,19 +3,17 @@ mongoose.connect( process.env.MONGODB_URI || "mongodb://localhost/bettingweb" );
 
 const group     = require('./db.group');
 const betting   = require('./db.betting');
-const league    = require('./db.league');
 const matches   = require('./db.matches');
-const sport     = require('./db.sport');
 const team      = require('./db.teams');
 const users     = require('./db.users');
 const beggingHistory = require('./db.group');
+const schedule = require(`./db.schedule`);
 
 module.exports = {
     teams   : team,
     users   : users,
     group   : group,
-    sport   : sport,
-    league  : league,
+    schedule: schedule,
     betting : betting,
     matches : matches,
     beggingHistory : beggingHistory
