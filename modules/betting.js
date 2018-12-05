@@ -46,7 +46,7 @@ module.exports = {
                         db.users.findByIdAndUpdate(userId, {fund:userFund}, (err, data) => {
                             db.bettingHistory.create({    
                                 amount: amount,
-                                date: new Date.now(),
+                                date: new Date(Date.now()),
                                 userId: userId,
                                 teamId: pdata.teamId,
                                 poolId: poolId

@@ -1,7 +1,7 @@
 const db =  require('./models');
 const bcrypt = require('bcrypt');
-db.group.drop();
-db.users.drop();
+// db.group.drop();
+// db.users.drop();
 db.group.create([{
             name: 'admin',
             description:'system admin with all the privileges'

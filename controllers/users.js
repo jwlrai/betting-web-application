@@ -55,6 +55,7 @@ route.post('/register',(req,res)=>{
             }
             else{
                 res.json(validate.getError());  
+                validate.resetValidation();
             }
         }
         else{

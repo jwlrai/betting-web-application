@@ -21,13 +21,15 @@
 </head>
 <body>
     <header>
-        <div class="container clearFix">
+        <div class="top">
+            <div class="container clearFix">
             <h1 class="floatLeft"><a href="#">BettingWeb</a></h1>
             <div class="floatRight">
                 <% if(data===null){ %>
                 <form  action="/users/login" method="POST"><input autocomplete="off" required class="inp"  type="email" placeholder="Email" name="email"/><input autocomplete="off" required class="inp" placeholder="Password" type="password" name="password"/>
                     <button class="btn">Login</button>
                 </form>
+            </div>
                 <% } else { %>
                     <nav>
                         <ul>
