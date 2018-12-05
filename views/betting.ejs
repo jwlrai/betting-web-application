@@ -1,1 +1,164 @@
-this is betting
+<div class="betting-page">
+    <h1 class="date">Saturday December 8th | 18:00 | American Airlines Center, Dallas, TX</h1>
+    <div class="basketball-schedule">
+        <div class="home-team-info">
+            <h2 class="home-team">Toronto Raptors</h2>
+            <img class="home-team-image" src="images/teamImages/torontoRaptors.jpeg" alt="Houston Rockets">
+            <form>
+                <div class="poolpot">
+                    <p class="pool">POOL:</p><h2 class="pot">$100.00</h2>
+                </div>
+                <div class="dollar">
+                    <p class="sign">$</p><input class= "stake" type="text" id="name" name="user_name" placeholder="STAKE">
+                </div>
+                <button class="bet">BET</button>
+            </form>
+        </div>
+        <div class="vs-and-location">
+            <p class="vs">VS</p>
+        </div>
+        <div class="away-team-info">
+            <h2 class="away-team">Dallas Mavericks</h2>
+            <img src="images/teamImages/dallasMavericks.jpeg" alt="Dallas Mavericks">
+            <form>
+                <div class="poolpot">
+                        <p class="pool">POOL:</p><h2 class="pot">$100.00</h2>
+                </div>
+                <div class="dollar">
+                        <p class="sign">$</p><input class= "stake" type="text" id="name" name="user_name" placeholder="STAKE">
+                </div>
+                <button class="bet">BET</button>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+
+<style>
+    form {
+        display: flex;
+        flex-direction: column;
+        width: 20vw;
+        align-items: center;
+    }
+    .sign {
+        font-size: 24px;
+        display: flex;
+        align-items: center;
+        color: black;
+    }
+    .dollar {
+        display: flex;
+        flex-direction: row;
+    }
+    input[type="text"] {
+    font-size:24px;
+}
+    ::-webkit-input-placeholder {
+    font-size: 4vh;
+    text-align: center;
+    padding: 1vh 1vw;
+    font-style: italic;
+}
+    .poolpot {
+        border: 2px solid black;
+        height: 10vh;
+        width: 100%;
+        background-color: #F7B632;
+        /* margin-bottom: 1vh; */
+        box-sizing: border-box;
+    }
+    .pot {
+        text-align: center;
+        width: 100%;
+    }
+
+    button {
+        border: 2px solid black;
+        height: 7vh;
+        width: 100%;
+        background-color: #F7B632;
+        font-size: 24px;
+    }
+    .stake {
+        height: 5vh;
+        width: 100%;
+        border: 2px solid transparent;
+        margin-top: 0;
+    }
+
+    .away-team {
+        text-align: center;
+        display: inline-block;
+        margin: 0 auto;
+    }
+    .home-team {
+        text-align: center;
+    }
+    .date {
+        background-color: #F7B632;
+        padding: 5px 0 5px 25px;
+        margin-top: 5px;
+        font-size: 20px;
+        text-align: center;
+    }
+    .location {
+        margin-right: 2vw;
+    }
+    .time {
+        margin-left: 2vh;
+    }
+    .location-and-time {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        margin-bottom: 3vh;
+    }
+    .enclosure {
+        border: 1px solid #efefef;
+    }
+    .vs-and-location {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .vs {
+        display: flex;
+        align-items: center;
+        margin: 0vw 16vw;
+        font-size: 5vh;
+    }
+
+    .basketball-schedule {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        margin-top: 3vh;
+    }
+
+    .home-team-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        width: 30vw;
+    }
+
+    .away-team-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: flex-end;
+        width: 30vw;
+    }
+
+    img {
+    width: 100%;
+    }
+</style>
