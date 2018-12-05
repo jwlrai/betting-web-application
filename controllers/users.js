@@ -149,8 +149,8 @@ route.put('/:userid/status/:type',(req,res)=>{
 });
 
 route.put('/edit/:type',(req,res)=>{
-    if(res.locals.userData!==null && res.locals.userData=='user'){
-        
+    if(res.locals.userData!==null){
+        const validate = new formValidate.validate();
         const type = ['password','email','name','address','phone','fund'];
         validate.setRules('',req.params.type,'alpha');   
         if(validate.exec()){

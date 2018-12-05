@@ -14,7 +14,7 @@
             }
            
         });
-
+        
         // sending image to server
         // jq('#formstest').submit(function(e){
         //     e.preventDefault();

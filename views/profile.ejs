@@ -3,23 +3,23 @@
 
             <tr>
                 <td>Name</td>
-                <td>: <input class='rl' data-val="<%- profile.name %>" value="<%- profile.name %>" /><span class="edit">edit</span></td>
+                <td>: <input class='rl' name="name" data-val="<%- profile.name %>" value="<%- profile.name %>" /><span class="edit">edit</span></td>
             </tr>
             <tr>
                 <td>Email</td>
-                <td>: <input class='rl' data-val="<%- profile.email %>" value="<%- profile.email %>" /><input placeholder="password required" class="pass" value="" /><span class="edit">edit</span></td>
+                <td>: <input class='rl' name="email" data-val="<%- profile.email %>" value="<%- profile.email %>" /><input placeholder="password required" class="pass" value="" /><span class="edit">edit</span></td>
             </tr>
             <tr>
                 <td>Address</td>
-                <td>: <input class='rl' data-val="<%- profile.address %>" value="<%- profile.address %>" /><span class="edit">edit</span></td>
+                <td>: <input class='rl' name="address" data-val="<%- profile.address %>" value="<%- profile.address %>" /><span class="edit">edit</span></td>
             </tr>
             <tr>
                 <td>Phone</td>
-                <td>: <input class='rl' data-val="<%- profile.phone %>" value="<%- profile.phone %>" /><span class="edit">edit</span></td>
+                <td>: <input class='rl' name="phone" data-val="<%- profile.phone %>" value="<%- profile.phone %>" /><span class="edit">edit</span></td>
             </tr>
             <tr>
-                <td>Money</td>
-                <td>: <input class='rl' data-val="<%- profile.fund %>" value="<%- profile.fund %>" /><input placeholder="password required" class="pass" value="" /><span class="edit">edit</span></td>
+                <td>Fund</td>
+                <td>: <input class='rl'name="fund" data-val="<%- profile.fund %>" value="<%- profile.fund %>" /><input placeholder="password required" class="pass" value="" /><span class="edit">edit</span></td>
             </tr>
         </table>
 </div>
@@ -49,29 +49,79 @@
     }
 </style>
 <script type="text/javascript">
+     $('#loading').show();
+     setTimeout(function(){  $('#loading').hide();  }, 800);
     $('.edit').click(function(e){
         $(this).siblings('input.rl').addClass('brd').focus().siblings('input.pass').addClass('brd').show();
         // console.log('clicked');
     });
     $('table tr td:last-child input').focusout(function(e){
+        var eles = $(this).parent('td').children('input.rl');
+        var prvele = $(this).parent('td').children('input.rl');
         var prv = $.trim($(this).parent('td').children('input.rl').data('val'));
         var cur = $.trim($(this).parent('td').children('input.rl').val());
+        var tpe = $.trim($(this).parent('td').children('input.rl').attr('name'));
+        console.log(tpe);
         if(prv !==cur){
+            $('#loading').show();
             if($(this).parent('td').children('input').length==2){
                 var pass = $.trim($(this).parent('td').children('input.pass').val());
                if(pass.replace(/\s/g, "") !==''){
+                    $.ajax({
+                        url: "/users/edit/"+tpe,
+                        type: "PUT",                  
+                        data:{
+                            changeto :cur,
+                            oldpassword:pass
+                        },
+                        success: function(res) {
+                            prvele.attr('data-val',cur);
+                            setTimeout(function(){  $('#loading').hide();  }, 800);
+                            $('table tr td input.pass').removeClass('brd').hide();
+                            $('table tr td input.rl').removeClass('brd');
+                        },
+                        error: function(jqXHR, textStatus, errorMessage) {
+                            ths.text(preData);
+                            setTimeout(function(){  $('#loading').hide();  }, 800);
+                            eles.val(prv);
+                            $('table tr td input.pass').removeClass('brd').hide();
+                            $('table tr td input.rl').removeClass('brd');
+                        }
 
+                    });
                }else{
                    alert('password needed');
                }
                
                
             }else{
-                
+                $.ajax({
+                        url: "/users/edit/"+tpe,
+                        type: "PUT",                  
+                        data:{
+                            changeto :cur,
+                         
+                        },
+                        success: function(res) {
+                            prvele.attr('data-val',cur);
+                            setTimeout(function(){  $('#loading').hide();  }, 800);
+                            $('table tr td input.pass').removeClass('brd').hide();
+                            $('table tr td input.rl').removeClass('brd');
+                        },
+                        error: function(jqXHR, textStatus, errorMessage) {
+                            eles.val(prv);
+                            setTimeout(function(){  $('#loading').hide();  }, 800);
+                            $('table tr td input.pass').removeClass('brd').hide();
+                            $('table tr td input.rl').removeClass('brd');
+                        }
+
+                    });
             }
            
+        }else{
+            $('table tr td input.pass').removeClass('brd').hide();
+            $('table tr td input.rl').removeClass('brd');
         }
-        $('table tr td input.pass').removeClass('brd').hide();
-        $('table tr td input.rl').removeClass('brd');
+        
     });
 </script>

@@ -158,7 +158,7 @@
         justify-content: flex-end;
     }
 
-    img {
+    .enclosure img {
         width: 250px;
         height: 250px;
     }
@@ -273,7 +273,7 @@
         //deleteing
         <% if(data =='admin'){ %>
         $('#fild_data').on('click','.enclosure>i',function(e){
-            console.log('clicked');
+            $('#loading').show();
             var id = $(this).data('id');
             var ths = $(this);
             $.ajax({
@@ -282,8 +282,10 @@
                 contentType: 'json',
                 success: function(res) {
                     ths.parent('div.enclosure').remove();
+                    setTimeout(function(){  $('#loading').hide();  }, 800);
                 },
                 error: function(jqXHR, textStatus, errorMessage) {
+                    setTimeout(function(){  $('#loading').hide();  }, 800);
                     
                 }
 
@@ -314,8 +316,8 @@
                 //    dataType:'application/json',
                   
                    success: function(response) {
-                    getteam();
-                        console.log(response);
+                        getteam();
+                       
                    },
                    error: function(jqXHR, textStatus, errorMessage) {
                        
@@ -357,7 +359,7 @@
                         // ele += ' <p class="time">18:00</p>';
                         ele += '</div>';
                         ele += '</div>';
-                        setTimeout(function(){  $('#loading').hide();  }, 800);
+                       
                         
 
 
@@ -365,8 +367,9 @@
 
                     });
                     $('#fild_data').empty().append(ele);
+                   
                 }
-                
+                setTimeout(function(){  $('#loading').hide();  }, 800);
                 },
                 error: function(jqXHR, textStatus, errorMessage) {
                     setTimeout(function(){  $('#loading').hide();  }, 800);

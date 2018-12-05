@@ -196,16 +196,17 @@
                 data.description = currData;
             }
             if(preData != currData){
+                $('#loading').show();
                 $.ajax({
                     url: "/teams/edit/"+id,
-                    type: "PUT",        
-                 
+                    type: "PUT",                  
                     data:data,
                     success: function(res) {
-                        
+                        setTimeout(function(){  $('#loading').hide();  }, 800);
                     },
                     error: function(jqXHR, textStatus, errorMessage) {
-                        
+                        ths.text(preData);
+                        setTimeout(function(){  $('#loading').hide();  }, 800);
                     }
 
                 });
