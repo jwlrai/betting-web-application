@@ -38,7 +38,7 @@ module.exports = {
             
             return data;
         };
-        this.execute = function(){
+        this.exec = function(){
             this.errors = [];
             for(let i=0; i < this.rules.length; i++){
                 let val = this.rules[i].val;

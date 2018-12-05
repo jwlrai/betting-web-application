@@ -39,7 +39,7 @@ route.post('/register',(req,res)=>{
             validate.setRules('phone',req.body.phone,'numeric','phone');
             validate.setRules('password',req.body.password,'istring','password');
            
-            if(validate.execute()){
+            if(validate.exec()){
                 obj = validate.getData();
                 obj.fund = 0;
                 obj.active = 1;
@@ -82,7 +82,7 @@ route.post('/register',(req,res)=>{
 route.post('/login',(req,res)=>{ // validate user only if not loged in
     if(!req.xhr){
         if(res.locals.userData===null){
-        
+            
             users.validateUser(req.body.email,req.body.password,(err,data)=>{
                 if(err){
                     res.writeHead(302, {
@@ -116,6 +116,7 @@ route.post('/login',(req,res)=>{ // validate user only if not loged in
 
 route.put('/:userid/status/:type',(req,res)=>{
     if(res.locals.userData!==null && res.locals.userData.group ==='admin'){
+        const validate = new formValidate.validate();
         const type = ['disable','enable'];
         if(type.includes(req.params.type)){
             validate.setRules('parameter',req.params.userid,'alphaNumeric');

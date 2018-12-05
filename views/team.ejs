@@ -148,8 +148,10 @@
 <script type="text/javascript">
     (function(){
         //deleteing
+        
         <% if(data =='admin'){ %>
         $('#fild_data').on('click','.team>i',function(e){
+            $('#loading').show();
             var id = $(this).data('val');
             var ths = $(this);
             $.ajax({
@@ -158,9 +160,10 @@
                 contentType: 'json',
                 success: function(res) {
                     ths.parent('div.team').remove();
+                    setTimeout(function(){  $('#loading').hide();  }, 800);
                 },
                 error: function(jqXHR, textStatus, errorMessage) {
-                    
+                    setTimeout(function(){  $('#loading').hide();  }, 800);
                 }
 
             });
@@ -207,16 +210,11 @@
 
                 });
             }
-            console.log(preData);
-            console.log(currData);
-            console.log(id);
-            // var cls = $(this).parent('p').attr('class');
-            // console.log(cls);
-
+           
 
         });
         $('#teamform').submit(function(e){
-            e.preventDefault();
+           e.preventDefault();
             var blobFile = $('#imgfile')[0].files[0];
            
                var formData = new FormData();
@@ -233,6 +231,7 @@
                    cache: false,
                    success: function(response) {
                         getteam();
+                        
                    },
                    error: function(jqXHR, textStatus, errorMessage) {
                        
@@ -242,6 +241,7 @@
         });
         <% } %>
         function getteam(){
+            $('#loading').show();
             $.ajax({
                 url: "/teams/get",
                 type: "GET",        
@@ -257,11 +257,12 @@
                         ele += '</div>';
                     });
                     $('#fild_data').empty().append(ele);
+                    setTimeout(function(){  $('#loading').hide();  }, 800);
                 }
                 
                 },
                 error: function(jqXHR, textStatus, errorMessage) {
-                    
+                    setTimeout(function(){  $('#loading').hide();  }, 800);
                 }
 
             });

@@ -325,6 +325,7 @@
         });
         <% } %>
         function getteam(){
+            $('#loading').show();
             $.ajax({
                 url: "/schedule/get",
                 type: "GET",        
@@ -356,7 +357,7 @@
                         // ele += ' <p class="time">18:00</p>';
                         ele += '</div>';
                         ele += '</div>';
-
+                        setTimeout(function(){  $('#loading').hide();  }, 800);
                         
 
 
@@ -368,7 +369,7 @@
                 
                 },
                 error: function(jqXHR, textStatus, errorMessage) {
-                    
+                    setTimeout(function(){  $('#loading').hide();  }, 800);
                 }
 
             });
