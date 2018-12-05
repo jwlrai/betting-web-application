@@ -1,13 +1,13 @@
 const express = require(`express`);
 const route = express.Router();
 const teams = require(`../modules/teams`);
-const multer = require(`express`);
+const multer = require(`multer`);
 const storage = multer.diskStorage({
     destination: `./public/images/upload`,
-filename: function(req, file, cb) {
-    let name = file.originalname.split(`.`);
-    cb(null, file.originalname + `-` + Date.now()+"."+name[1]);
-}
+    filename: function(req, file, cb) {
+        let name = file.originalname.split(`.`);
+        cb(null, file.originalname + `-` + Date.now()+"."+name[1]);
+    }
 });
 const upload = multer({ storage: storage});
 
@@ -31,7 +31,7 @@ route.post(`/create`, upload.single(`teamImg`), (req, res) => {
     if (res.locals.userData !== null && res.locals.userData.group == `admin`){
         const teamName = req.body.teamName;
         const description = req.body.description;
-        const imgLink = `/images/upload/` + req.files.filename;
+        const imgLink = `/images/upload/` + req.file.filename;
         teams.createTeams(teamName, description, imgLink, (err, data) => {
             if (err) {
                 console.log(err);
