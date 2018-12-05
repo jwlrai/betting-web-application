@@ -49,7 +49,7 @@
                 <input type="submit" value="Submit" class="btn btnmain"/>
             </p>
         </div>
-            
+
     </form>   
 </div>
 <% } %>
@@ -57,34 +57,53 @@
     
     </datalist>
 <div id="fild_data" class="clearFix">
-    
-    <!-- <div class="schedule"> -->
-        <!-- <div class="schedule">
-            <p >
-                <i>x</i>
-                <span class="nm">Team A</span>
-                <span class="imgs"><img src="/images/upload/table schema.png-1543979416536.png"> </span>
-                <span class="cl">:</span>
-                <span class="imgs"><img src="/images/upload/table schema.png-1543979416536.png"></span>
-                <span class="nm">Team B</span>
-            </p>
-            <p class="dtl">12 feb 2018 , sanfancisco</p>
-        </div>
+        <h1 class="date">Saturday, December 8th</h1>
         <div class="schedule">
-                <p >
-                    <i>x</i>
-                    <span class="nm">Team A</span>
-                    <span class="imgs"><img src="/images/upload/table schema.png-1543979416536.png"> </span>
-                    <span class="cl">:</span>
-                    <span class="imgs"><img src="/images/upload/table schema.png-1543979416536.png"></span>
-                    <span class="nm">Team B</span>
-                </p>
-                <p class="dtl">12 feb 2018 , sanfancisco</p>
-            </div> -->
-    <!-- </div> -->
-   
+        <div class="home-team-info">
+            <h2 class="home-team">Houston Rockets</h2>
+            <img class="home-team-image" src="images/teamImages/houstonRockets.jpeg" alt="Houston Rockets">
+        </div>
+        <div>
+            <p class="vs">VS</p>
+            <p class="location">American Airlines Center, Dallas, TX</p>
+        </div>
+        <div class="away-team-info">
+            <h2 class="away-team">Dallas Mavericks</h2>
+            <img src="images/teamImages/dallasMavericks.jpeg" alt="Dallas Mavericks">
+        </div>
+    </div>
 </div>
+
 <style>
+    .vs {
+        display: flex;
+        align-items: center;
+        margin: 0vw 20vw;
+    }
+
+    .schedule {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .home-team-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .away-team-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+    }
+
+    img {
+        width: auto;
+        height: 30vh;
+    }
+
     .schedule{
         border:1px solid #efefef;
         margin-bottom:8px;
@@ -276,7 +295,7 @@
 
             });
         }
-        getteam();
+        // getteam();
 
 
 
