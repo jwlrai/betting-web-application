@@ -3,8 +3,14 @@ const mongoose = require('mongoose');
 const bettingSchema = new mongoose.Schema({
 
     amount: Number,
-    teamId: String,
-    matchId: String,
+    teamId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: `team`
+    },
+    matchId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: `schedule`
+    },
     active: Number
 });
 

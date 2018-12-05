@@ -12,7 +12,7 @@ const bettingSchema = new mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref:'team'
     },
-    matchId:{
+    poolId:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'matches'
     }

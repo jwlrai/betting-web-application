@@ -67,6 +67,7 @@ route.post('/register',(req,res)=>{
             }
         }
         else{
+
             res.writeHead(302, {
                 'Location': '/'
             });
@@ -170,7 +171,6 @@ route.put('/edit/:type',(req,res)=>{
                     validate.setRules('Password',req.body.oldpassword,'istring','oldpassword');
                 }
                 else{
-                
                     validate.setRules('change to',req.body.changeto,'alphaNumericSpace',change);
 
                 }
@@ -196,8 +196,7 @@ route.put('/edit/:type',(req,res)=>{
                         }
                     });
                 }
-                else{
-                   
+                else{ 
                     res.json(validate.getError());  
                     return res.end();
                 }

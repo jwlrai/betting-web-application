@@ -22,7 +22,6 @@
                     <td>: <input class="inp" autocomplete="off" type="text" name="dateTime" /></td>
                 </tr>
             </table>
-              
         </div>
         <div class="floatRight">
             <table>
@@ -49,7 +48,7 @@
                 <input type="submit" value="Submit" class="btn btnmain"/>
             </p>
         </div>
-            
+
     </form>   
 </div>
 <% } %>
@@ -57,43 +56,119 @@
     
     </datalist>
 <div id="fild_data" class="clearFix">
-    
-    <!-- <div class="schedule"> -->
-        <!-- <div class="schedule">
-            <p >
-                <i>x</i>
-                <span class="nm">Team A</span>
-                <span class="imgs"><img src="/images/upload/table schema.png-1543979416536.png"> </span>
-                <span class="cl">:</span>
-                <span class="imgs"><img src="/images/upload/table schema.png-1543979416536.png"></span>
-                <span class="nm">Team B</span>
-            </p>
-            <p class="dtl">12 feb 2018 , sanfancisco</p>
+    <div class="enclosure">
+        <h1 class="date">Saturday, December 8th</h1>
+        <div class="basketball-schedule">
+            <div class="home-team-info">
+                <h2 class="home-team">Houston Rockets</h2>
+                <img class="home-team-image" src="images/teamImages/houstonRockets.jpeg" alt="Houston Rockets">
+            </div>
+            <div class="vs-and-location">
+                <p class="vs">VS</p>
+            </div>
+            <div class="away-team-info">
+                <h2 class="away-team">Dallas Mavericks</h2>
+                <img src="images/teamImages/dallasMavericks.jpeg" alt="Dallas Mavericks">
+            </div>
         </div>
-        <div class="schedule">
-                <p >
-                    <i>x</i>
-                    <span class="nm">Team A</span>
-                    <span class="imgs"><img src="/images/upload/table schema.png-1543979416536.png"> </span>
-                    <span class="cl">:</span>
-                    <span class="imgs"><img src="/images/upload/table schema.png-1543979416536.png"></span>
-                    <span class="nm">Team B</span>
-                </p>
-                <p class="dtl">12 feb 2018 , sanfancisco</p>
-            </div> -->
-    <!-- </div> -->
-   
+        <div class="location-and-time">
+            <p class="location">American Airlines Center, Dallas, TX</p>
+            <p class="time">18:00</p>
+        </div>
+    </div>
+    <div class="enclosure">
+        <h1 class="date">Saturday, December 8th</h1>
+        <div class="basketball-schedule">
+            <div class="home-team-info">
+                <h2 class="home-team">Sacramento Kings</h2>
+                <img class="home-team-image" src="images/teamImages/sacramentoKings.jpeg" alt="Houston Rockets">
+            </div>
+            <div class="vs-and-location">
+                <p class="vs">VS</p>
+            </div>
+            <div class="away-team-info">
+                <h2 class="away-team">Indiana Pacers</h2>
+                <img src="images/teamImages/indianaPacers.jpeg" alt="Dallas Mavericks">
+            </div>
+        </div>
+        <div class="location-and-time">
+            <p class="location">Bankers Life Fieldhouse, Indianapolis, IN</p>
+            <p class="time">19:00</p>
+        </div>
+    </div>
 </div>
+
+
 <style>
+    .away-team {
+        text-align: center;
+    }
+    .date {
+        background-color: #F7B632;
+        padding: 5px 0 5px 25px;
+    }
+    .location {
+        margin-right: 2vw;
+    }
+    .time {
+        margin-left: 2vh;
+    }
+    .location-and-time {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        margin-bottom: 3vh;
+    }
+    .enclosure {
+        border: 1px solid #efefef;
+    }
+    .vs-and-location {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .vs {
+        display: flex;
+        align-items: center;
+        margin: 0vw 16vw;
+        font-size: 5vh;
+    }
+
+    .basketball-schedule {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        margin-top: 3vh;
+    }
+
+    .home-team-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .away-team-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+    }
+
+    img {
+        width: 250px;
+        height: 250px;
+    }
+
     .schedule{
         border:1px solid #efefef;
         margin-bottom:8px;
+        background-color: #F8F8F8;
     }
     .schedule > p:first-child{
         position: relative;
         text-align: center;
         font-size: 23px;
-       
     }
     .schedule p> i{
         position:absolute;
@@ -276,7 +351,7 @@
 
             });
         }
-        getteam();
+        // getteam();
 
 
 
