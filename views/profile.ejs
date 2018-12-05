@@ -1,0 +1,77 @@
+<div id="profile">
+        <table>
+
+            <tr>
+                <td>Name</td>
+                <td>: <input class='rl' data-val="<%- profile.name %>" value="<%- profile.name %>" /><span class="edit">edit</span></td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td>: <input class='rl' data-val="<%- profile.email %>" value="<%- profile.email %>" /><input placeholder="password required" class="pass" value="" /><span class="edit">edit</span></td>
+            </tr>
+            <tr>
+                <td>Address</td>
+                <td>: <input class='rl' data-val="<%- profile.address %>" value="<%- profile.address %>" /><span class="edit">edit</span></td>
+            </tr>
+            <tr>
+                <td>Phone</td>
+                <td>: <input class='rl' data-val="<%- profile.phone %>" value="<%- profile.phone %>" /><span class="edit">edit</span></td>
+            </tr>
+            <tr>
+                <td>Money</td>
+                <td>: <input class='rl' data-val="<%- profile.fund %>" value="<%- profile.fund %>" /><input placeholder="password required" class="pass" value="" /><span class="edit">edit</span></td>
+            </tr>
+        </table>
+</div>
+
+<style>
+    #profile{
+        padding:50px;
+    }
+    table tr td{
+        padding:3px 10px;
+    }
+    table tr td input{
+        border:none;
+        padding:3px 10px;
+        margin-right: 10px;
+    }
+    .edit{
+        font-size:11px;
+        color:red;
+        cursor: pointer;
+    }
+    .pass{
+        display:none;
+    }
+    .brd{
+        border:1px solid #d1d1d1 !important;
+    }
+</style>
+<script type="text/javascript">
+    $('.edit').click(function(e){
+        $(this).siblings('input.rl').addClass('brd').focus().siblings('input.pass').addClass('brd').show();
+        // console.log('clicked');
+    });
+    $('table tr td:last-child input').focusout(function(e){
+        var prv = $.trim($(this).parent('td').children('input.rl').data('val'));
+        var cur = $.trim($(this).parent('td').children('input.rl').val());
+        if(prv !==cur){
+            if($(this).parent('td').children('input').length==2){
+                var pass = $.trim($(this).parent('td').children('input.pass').val());
+               if(pass.replace(/\s/g, "") !==''){
+
+               }else{
+                   alert('password needed');
+               }
+               
+               
+            }else{
+                
+            }
+           
+        }
+        $('table tr td input.pass').removeClass('brd').hide();
+        $('table tr td input.rl').removeClass('brd');
+    });
+</script>

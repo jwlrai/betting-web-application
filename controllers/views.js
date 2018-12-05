@@ -60,11 +60,13 @@ route.get('/page/bettings',(req,res)=>{
 });
 route.get('/page/profile',(req,res)=>{
     if(res.locals.userData!==null ){
-        views.profile(function(err,sdata){
+        views.profile(res.locals.userData.id,function(err,sdata){
             if(err){
                 res.status(404).end();
+            }else{
+                res.render('profile',{data : res.locals.userData.group,profile:sdata});
             }
-            res.render('profile',{data : res.locals.userData.group,team:sdata});
+           
         });
     }else{
         res.status(403).end();
