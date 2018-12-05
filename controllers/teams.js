@@ -66,6 +66,7 @@ route.put(`/edit/:teamId`, (req, res) => {
         console.log(`inside`);
         const teamId = req.params.teamId;
         const teamName = req.body.teamName;
+        console.log(teamName);
         const description = req.body.description;
         const updateData = {
         };
@@ -75,7 +76,7 @@ route.put(`/edit/:teamId`, (req, res) => {
         if (description !== undefined) {
             updateData.description = description;
         };
-        console.log(teamId);
+        console.log(updateData);
         teams.editTeams(teamId, updateData, (err, data) => {
             if (err) {
                 console.log(err);

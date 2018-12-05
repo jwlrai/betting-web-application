@@ -165,16 +165,53 @@
 
             });
         });
+        var conformation = false;
         $('#fild_data').on('click','.team >  p >i.edit',function(e){
-            console.log('clicked');
-            $(this).siblings('span').attr('contenteditable',true);
-            $(this).siblings('span').focus();
+          
+            var conformation = confirm("Are you sure you want to make changes");
+            if(conformation){
+                $(this).siblings('span').attr('contenteditable',true);
+                $(this).siblings('span').focus();
+            }
+            
             
         });
         $('#fild_data').on('focusout','.team >  p span ',function(e){
+           
+            var par = $(this).parent('p').attr('class');
+           
             $(this).attr('contenteditable',false).focus();
-            var cls = $(this).parent('p').attr('class');
-            console.log(cls);
+            var id = $(this).parents('div.team').children('i').data('val');
+            var preData = $(this).data('val');
+            var currData = $(this).text();
+            var ths  = $(this);
+            var data = {};
+            if(par=='nm'){
+                data.teamName = currData;
+            }
+            else if(par=='dis'){
+                data.description = currData;
+            }
+            if(preData != currData){
+                $.ajax({
+                    url: "/teams/edit/"+id,
+                    type: "PUT",        
+                 
+                    data:data,
+                    success: function(res) {
+                        
+                    },
+                    error: function(jqXHR, textStatus, errorMessage) {
+                        
+                    }
+
+                });
+            }
+            console.log(preData);
+            console.log(currData);
+            console.log(id);
+            // var cls = $(this).parent('p').attr('class');
+            // console.log(cls);
 
 
         });
@@ -215,8 +252,8 @@
                     res.forEach(function(el){
                         ele += '<div class="team"><i data-val="'+el._id+'">x</i>';
                         ele += '<img src="'+el.imgLink+'">';
-                        ele += '<p class="nm" ><i class="edit">edit</i><span>'+el.name+'</span></p>';
-                        ele += '<p class="dis" ><i class="edit">edit</i><span>'+el.description+'</span></p>';
+                        ele += '<p class="nm" ><i class="edit">edit</i><span data-val="'+el.name+'">'+el.name+'</span></p>';
+                        ele += '<p class="dis" ><i class="edit">edit</i><span data-val="'+el.description+'">'+el.description+'</span></p>';
                         ele += '</div>';
                     });
                     $('#fild_data').empty().append(ele);
