@@ -1,1 +1,302 @@
-this si schedule
+<% if(data =='admin'){ %>
+<div id="team">
+    <h3>Create Schedule</h3>
+    <form id="teamform" class="clearFix">
+        <div class="floatLeft">
+            <table>
+                <tr>
+                    <td>Team A </td>
+                    <td>: 
+                        <select name="team1" class="inp" >
+                            <% if(team.length > 0){ 
+                                team.forEach(function(ele){
+                            %>
+                            <option  value="<%- ele._id %>"><%- ele.name %></option>
+                            <%   }); } %>
+                        </select>
+                        <!-- <input list="teamslist" class="inp" autocomplete="off" type="text" name="team1" /> -->
+                    </td>
+                </tr>
+                <tr>
+                    <td>Date</td>
+                    <td>: <input class="inp" autocomplete="off" type="text" name="dateTime" /></td>
+                </tr>
+            </table>
+              
+        </div>
+        <div class="floatRight">
+            <table>
+                <tr>
+                    <td>Team B </td>
+                    <td>: 
+                        <select name="team2" class="inp" >
+                            <% if(team.length > 0){ 
+                                team.forEach(function(ele){
+                            %>
+                            <option  value="<%- ele._id %>"><%- ele.name %></option>
+                            <%   }); } %>
+                        </select>
+                        <!-- <input  list="teamslist"class="inp" autocomplete="off" type="text" name="team2" /> -->
+                    </td>
+                </tr>
+                <tr>
+                    <td>Location</td>
+                    <td>: <input class="inp" autocomplete="off" type="text" name="location" /></td>
+                </tr>
+            </table>
+            <p>
+                <input type="reset" value="Reset" class="btn"/> 
+                <input type="submit" value="Submit" class="btn btnmain"/>
+            </p>
+        </div>
+            
+    </form>   
+</div>
+<% } %>
+<datalist id="browsers"></datalist>
+    
+    </datalist>
+<div id="fild_data" class="clearFix">
+    
+    <!-- <div class="schedule"> -->
+        <!-- <div class="schedule">
+            <p >
+                <i>x</i>
+                <span class="nm">Team A</span>
+                <span class="imgs"><img src="/images/upload/table schema.png-1543979416536.png"> </span>
+                <span class="cl">:</span>
+                <span class="imgs"><img src="/images/upload/table schema.png-1543979416536.png"></span>
+                <span class="nm">Team B</span>
+            </p>
+            <p class="dtl">12 feb 2018 , sanfancisco</p>
+        </div>
+        <div class="schedule">
+                <p >
+                    <i>x</i>
+                    <span class="nm">Team A</span>
+                    <span class="imgs"><img src="/images/upload/table schema.png-1543979416536.png"> </span>
+                    <span class="cl">:</span>
+                    <span class="imgs"><img src="/images/upload/table schema.png-1543979416536.png"></span>
+                    <span class="nm">Team B</span>
+                </p>
+                <p class="dtl">12 feb 2018 , sanfancisco</p>
+            </div> -->
+    <!-- </div> -->
+   
+</div>
+<style>
+    .schedule{
+        border:1px solid #efefef;
+        margin-bottom:8px;
+    }
+    .schedule > p:first-child{
+        position: relative;
+        text-align: center;
+        font-size: 23px;
+       
+    }
+    .schedule p> i{
+        position:absolute;
+        right:-1px; top:-1px;
+        padding: 2px 5px;
+        background-color:red;
+        color:white;
+        font-size:11px;
+        cursor: pointer;
+        display: none;
+    }
+    <% if(data =='admin'){ %>
+    .schedule:hover p> i{
+        display:block;
+    }
+    <% } %>
+    .dtl{
+        border:none;
+        font-size:12px;
+        text-align: center;
+    }
+    .imgs img{
+        width:100px;
+        border:1px solid #d1d1d1;
+        display: inline-block;
+        margin-top:5px;
+    }
+    .nm{
+        display: inline-block;
+        vertical-align: top;
+        margin-top: 20px;
+        padding: 0 25px;
+    }
+    .cl{
+        display: inline-block;
+        vertical-align: top;
+        margin-top: 20px;
+        padding: 0 15px;
+    }
+    
+    /*  */
+    #team{
+        margin-top:30px;
+        padding:15px 20px;
+        border:1px solid #bababa;
+        position: relative;
+        
+        
+    }
+    
+    #team h3{
+        position: absolute;
+        top:-9px;
+        left:20px;
+        background-color:white;
+        padding:3px 10px;
+    }
+    #teamform{
+        width:100%;
+    }
+    #teamform div{
+        width:50%;
+    }
+    #teamform > div table{
+        width:100%;
+    }
+    #teamform > div table tr td{
+        padding:3px 0;
+    }
+    #teamform input,#teamform select{
+        padding: .6em 1em;
+        width:96%;
+    }
+    #teamform > div p{
+        margin-bottom:5px;
+    }
+    #teamform div textarea{
+        border-radius: 3px;
+        margin: 0;
+        color: #262728;
+        border: 1px solid #bdc7d8;
+        resize: none;
+        width:100%;
+        height:58px;
+        padding:5px;
+    }
+    #teamform > div p:last-child{
+        margin-top:5px;
+        text-align: right;
+    }
+    #fild_data{
+        border: 1px solid #bababa;
+        padding: 15px;
+        margin-top:25px;
+    }
+</style>
+<script type="text/javascript">
+    (function(){
+        //deleteing
+        <% if(data =='admin'){ %>
+        $('#fild_data').on('click','.team>i',function(e){
+            var id = $(this).data('val');
+            var ths = $(this);
+            $.ajax({
+                url: "/teams/"+id,
+                type: "DELETE",        
+                contentType: 'json',
+                success: function(res) {
+                    ths.parent('div.team').remove();
+                },
+                error: function(jqXHR, textStatus, errorMessage) {
+                    
+                }
+
+            });
+        });
+        $('#fild_data').on('click','.team >  p >i.edit',function(e){
+            console.log('clicked');
+            $(this).siblings('span').attr('contenteditable',true);
+            $(this).siblings('span').focus();
+            
+        });
+        $('#fild_data').on('focusout','.team >  p span ',function(e){
+            $(this).attr('contenteditable',false).focus();
+            var cls = $(this).parent('p').attr('class');
+            console.log(cls);
+
+
+        });
+        $('#teamform').submit(function(e){
+            e.preventDefault();    
+            let data = $(this).serialize();
+              
+               $.ajax({
+                   url: "schedule/create",
+                   type: "POST",
+                   data: data,                  
+                //    contentType: 'json',
+                //    dataType:'application/json',
+                  
+                   success: function(response) {
+                    getteam();
+                        console.log(response);
+                   },
+                   error: function(jqXHR, textStatus, errorMessage) {
+                       
+                   }
+       
+               });
+        });
+        <% } %>
+        function getteam(){
+            $.ajax({
+                url: "/schedule/get",
+                type: "GET",        
+                contentType: 'json',
+                success: function(res) {
+                    console.log(res);
+                    let ele = "";
+                if(res.length > 0){
+                    res.forEach(function(el){
+                        ele += '<div class="schedule"><p><i data-id="'+el._id+'">x</i>';
+                        ele += '<span class="nm">'+el.team1.name+'</span>';
+                        ele += '<span class="imgs"><img src="'+el.team1.imgLink+'"> </span>';
+                        ele += '<span class="cl">:</span>'
+                        ele += '<span class="imgs"><img src="'+el.team2.imgLink+'"></span>';
+                        ele += '<span class="nm">'+el.team2.name+'</span>';
+                        ele += '</p>';
+                        ele += '<p class="dtl">'+el.dateTime+' , '+el.location+'</p></div>';
+
+
+                    });
+                    $('#fild_data').empty().append(ele);
+                }
+                
+                },
+                error: function(jqXHR, textStatus, errorMessage) {
+                    
+                }
+
+            });
+        }
+        getteam();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    })();
+</script>

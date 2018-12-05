@@ -10,7 +10,7 @@ app.use(express.json());
 app.use(cookieParser())
 app.use(express.static('public'));
 
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: true }))
 
 // app.post('/sport',upload.single('fileToUpload'),(req,res)=>{
 //     res.end('sdfsd');

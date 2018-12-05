@@ -1,5 +1,6 @@
 const express = require('express');
 const route = express.Router();
+const views = require('../modules/m.view');
 
 
 route.get('/',(req,res)=>{   
@@ -42,7 +43,10 @@ route.get('/page/teams',(req,res)=>{
 });
 route.get('/page/schedules',(req,res)=>{
     if(res.locals.userData!==null){
-        res.render('schedule',{data : res.locals.userData.group});
+        views.schedule(function(err,sdata){
+            res.render('schedule',{data : res.locals.userData.group,team:sdata});
+        });
+        
     }else{
         res.status(403).end();
     }
@@ -56,7 +60,14 @@ route.get('/page/bettings',(req,res)=>{
 });
 route.get('/page/profile',(req,res)=>{
     if(res.locals.userData!==null ){
-       
+        views.profile(res.locals.userData.id,function(err,sdata){
+            if(err){
+                res.status(404).end();
+            }else{
+                res.render('profile',{data : res.locals.userData.group,profile:sdata});
+            }
+           
+        });
     }else{
         res.status(403).end();
     }

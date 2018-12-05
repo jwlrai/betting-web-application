@@ -1,37 +1,102 @@
+<% if(data =='admin'){ %>
 <div id="team">
-    <h3>Create Team</h3>
+    <h3>Create team</h3>
     <form id="teamform" class="clearFix">
         <div class="floatLeft">
             <table>
                 <tr>
-                    <td>Team Name </td>
-                    <td> : <input class="inp" placeholder="" autocomplete="off" type="text" name="name" /></td>
+                    <td>team Name </td>
+                    <td> : <input class="inp" id="teamname" placeholder="" autocomplete="off" type="text" name="teamName" /></td>
                 </tr>
                 <tr>
-                    <td>Team Image</td>
-                    <td> : <input class="inp" placeholder="" autocomplete="off" type="file" name="image" /></td>
+                    <td>team Image</td>
+                    <td> : <input class="inp" id="imgfile" placeholder="" autocomplete="off" type="file" name="image" /></td>
                 </tr>
             </table>
               
         </div>
         <div class="floatRight">
             <p>Description</p>
-            <textarea></textarea>
+            <textarea id="teamdes" name="description"></textarea>
             <p><input type="reset" value="Reset" class="btn"/> <input type="submit" value="Submit" class="btn btnmain"/></p>
         </div>
             
     </form>
 </div>
+<% } %>
 <div id="fild_data" class="clearFix">
         
-       
+   
 </div>
 <style>
+    .team{
+        position: relative;
+        width:200px;
+        border:1px solid #d1d1d1;
+        padding:10px;
+        float:left;
+        margin-right:10px; margin-bottom:10px;
+    }
+    .team > img{
+        width:100%;
+        height:150px;
+    }
+    .team > i{
+        position:absolute;
+        background-color:red;
+        color:white;
+        font-family: Arial, Helvetica, sans-serif;
+        right:0; top:0;
+        padding:1px 5px;
+        cursor:pointer;
+        display: none;
+    }
+    <% if(data =='admin'){ %>
+    .team:hover i{
+        display: block;
+    }
+    <% } %>
+    .team >  p.nm{
+        position: relative;
+        font-size:1.4em;
+        text-align: center;
+        padding:12px 2px 6px;
+    }
+    .team >  p.dis{
+        position: relative;
+        font-size:.9em;
+        text-align: center;
+        padding:2px;
+    }
+    <% if(data =='admin'){ %>
+    .team >  p.dis:hover,.team >  p.nm:hover{
+        border:1px solid #eee;
+        opacity: .7;
+    }
+    <% } %>
+    .team > p > i.edit{
+        position: absolute;
+        font-size:10px;
+        display: none;
+        background-color:red;
+        padding:2px 4px;
+        cursor: pointer;
+        right:0; top:0;
+        color:white;
+    }
+    <% if(data =='admin'){ %>
+    .team > p:hover >i.edit{
+        display: block;
+    }
+    <% } %>
+    /*  */
     #team{
         margin-top:30px;
         padding:15px 20px;
         border:1px solid #bababa;
         position: relative;
+        
+        
     }
     
     #team h3{
@@ -80,3 +145,111 @@
         margin-top:25px;
     }
 </style>
+<script type="text/javascript">
+    (function(){
+        //deleteing
+        <% if(data =='admin'){ %>
+        $('#fild_data').on('click','.team>i',function(e){
+            var id = $(this).data('val');
+            var ths = $(this);
+            $.ajax({
+                url: "/teams/"+id,
+                type: "DELETE",        
+                contentType: 'json',
+                success: function(res) {
+                    ths.parent('div.team').remove();
+                },
+                error: function(jqXHR, textStatus, errorMessage) {
+                    
+                }
+
+            });
+        });
+        $('#fild_data').on('click','.team >  p >i.edit',function(e){
+            console.log('clicked');
+            $(this).siblings('span').attr('contenteditable',true);
+            $(this).siblings('span').focus();
+            
+        });
+        $('#fild_data').on('focusout','.team >  p span ',function(e){
+            $(this).attr('contenteditable',false).focus();
+            var cls = $(this).parent('p').attr('class');
+            console.log(cls);
+
+
+        });
+        $('#teamform').submit(function(e){
+            e.preventDefault();
+            var blobFile = $('#imgfile')[0].files[0];
+           
+               var formData = new FormData();
+               formData.append("teamImg", blobFile);
+               formData.append("teamName", $('#teamname').val());
+               formData.append("description", $('#teamdes').val());
+       
+               $.ajax({
+                   url: "teams/create",
+                   type: "POST",
+                   data: formData,
+                   processData: false,
+                   contentType: false,
+                   cache: false,
+                   success: function(response) {
+                        getteam();
+                   },
+                   error: function(jqXHR, textStatus, errorMessage) {
+                       
+                   }
+       
+               });
+        });
+        <% } %>
+        function getteam(){
+            $.ajax({
+                url: "/teams/get",
+                type: "GET",        
+                contentType: 'json',
+                success: function(res) {
+                    let ele = "";
+                if(res.length > 0){
+                    res.forEach(function(el){
+                        ele += '<div class="team"><i data-val="'+el._id+'">x</i>';
+                        ele += '<img src="'+el.imgLink+'">';
+                        ele += '<p class="nm" ><i class="edit">edit</i><span>'+el.name+'</span></p>';
+                        ele += '<p class="dis" ><i class="edit">edit</i><span>'+el.description+'</span></p>';
+                        ele += '</div>';
+                    });
+                    $('#fild_data').empty().append(ele);
+                }
+                
+                },
+                error: function(jqXHR, textStatus, errorMessage) {
+                    
+                }
+
+            });
+        }
+        getteam();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    })();
+</script>

@@ -55,10 +55,15 @@ route.post('/register',(req,res)=>{
             }
             else{
                 res.json(validate.getError());  
-                validate.resetValidation();
+                res.writeHead(302, {
+                    'Location': '/'
+                });
+                res.end();
+                
             }
         }
         else{
+
             res.writeHead(302, {
                 'Location': '/'
             });
@@ -76,9 +81,13 @@ route.post('/login',(req,res)=>{ // validate user only if not loged in
         
             users.validateUser(req.body.email,req.body.password,(err,data)=>{
                 if(err){
-                    if(err==='invalid') res.status(203).end('invalid username or password');
-                    else if(err==='disabled') res.status(203).end('user is disabled');
-                    else res.status(500).end();
+                    res.writeHead(302, {
+                        'Location': '/'
+                    });
+                    res.end();
+                    // if(err==='invalid') res.status(203).end('invalid username or password');
+                    // else if(err==='disabled') res.status(203).end('user is disabled');
+                    // else res.status(500).end();
                 }
                 else{
                 
@@ -158,7 +167,6 @@ route.put('/edit/:type',(req,res)=>{
                     validate.setRules('Password',req.body.oldpassword,'istring','oldpassword');
                 }
                 else{
-                
                     validate.setRules('change to',req.body.changeto,'alphaNumericSpace',change);
 
                 }
@@ -184,8 +192,7 @@ route.put('/edit/:type',(req,res)=>{
                         }
                     });
                 }
-                else{
-                   
+                else{ 
                     res.json(validate.getError());  
                     return res.end();
                 }
