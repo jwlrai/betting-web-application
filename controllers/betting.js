@@ -32,6 +32,20 @@ route.delete(`/delete/pool`, (req, res) => {
     })
 })
 
+route.post(`/makeBet`, (req, res) => {
+    const poolId = req.body.poolId;
+    const amount = req.body.amount;
+    const userId = res.locals.userData.id;
+    const userAmount = res.locals.userData.fund - amount;
+    betting.makeBet(poolId, amount, userId, userAmount, (err, data) => {
+        if (err) {
+            res.status(500).end();
+        } else {
+            res.json(data);
+        };
+    });
+});
+
 
 
 
