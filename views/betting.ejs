@@ -33,6 +33,41 @@
     </div>
 
 </div>
+<div class="betting-page">
+        <h1 class="date">Saturday December 8th | 19:30 | State Farm Arema, Atlanta, GA</h1>
+        <div class="basketball-schedule">
+            <div class="home-team-info">
+                <h2 class="home-team">Denver Nuggets</h2>
+                <img class="home-team-image" src="images/teamImages/denverNuggets.jpeg" alt="Houston Rockets">
+                <form>
+                    <div class="poolpot">
+                        <p class="pool">POOL:</p><h2 class="pot">$100.00</h2>
+                    </div>
+                    <div class="dollar">
+                        <p class="sign">$</p><input class= "stake" type="text" id="name" name="user_name" placeholder="STAKE">
+                    </div>
+                    <button class="bet">BET</button>
+                </form>
+            </div>
+            <div class="vs-and-location">
+                <p class="vs">VS</p>
+            </div>
+            <div class="away-team-info">
+                <h2 class="away-team">Atlanta Hawks</h2>
+                <img src="images/teamImages/atlantaHawks.jpeg" alt="Dallas Mavericks">
+                <form>
+                    <div class="poolpot">
+                            <p class="pool">POOL:</p><h2 class="pot">$100.00</h2>
+                    </div>
+                    <div class="dollar">
+                            <p class="sign">$</p><input class= "stake" type="text" id="name" name="user_name" placeholder="STAKE">
+                    </div>
+                    <button class="bet">BET</button>
+                </form>
+            </div>
+        </div>
+    
+    </div>
 
 
 
@@ -43,7 +78,7 @@
     form {
         display: flex;
         flex-direction: column;
-        width: 20vw;
+        width: 100%;
         align-items: center;
     }
     .sign {
@@ -84,6 +119,7 @@
         width: 100%;
         background-color: #F7B632;
         font-size: 24px;
+        margin-bottom: 5vh;
     }
     .stake {
         height: 5vh;
@@ -132,7 +168,7 @@
     .vs {
         display: flex;
         align-items: center;
-        margin: 0vw 16vw;
+        margin: 0vw 10vh;
         font-size: 5vh;
     }
 
@@ -147,7 +183,7 @@
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
-        width: 30vw;
+        width: 40vw;
     }
 
     .away-team-info {
@@ -155,7 +191,7 @@
         flex-direction: column;
         justify-content: flex-end;
         align-items: flex-end;
-        width: 30vw;
+        width: 40vw;
     }
 
     img {
