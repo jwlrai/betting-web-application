@@ -19,6 +19,7 @@ route.get(`/get`, (req, res) => {
 
 route.post(`/create`, (req, res) => {
     if (res.locals.userData !== null && res.locals.userData.group == `admin`) {
+        console.log(req);
         const team1 = req.body.team1;
         const team2 = req.body.team2;
         const dateTime = req.body.dateTime;

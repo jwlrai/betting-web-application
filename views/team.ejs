@@ -1,3 +1,4 @@
+<% if(data =='admin'){ %>
 <div id="team">
     <h3>Create team</h3>
     <form id="teamform" class="clearFix">
@@ -22,6 +23,7 @@
             
     </form>
 </div>
+<% } %>
 <div id="fild_data" class="clearFix">
         
    
@@ -49,9 +51,11 @@
         cursor:pointer;
         display: none;
     }
+    <% if(data =='admin'){ %>
     .team:hover i{
         display: block;
     }
+    <% } %>
     .team >  p.nm{
         position: relative;
         font-size:1.4em;
@@ -64,10 +68,12 @@
         text-align: center;
         padding:2px;
     }
+    <% if(data =='admin'){ %>
     .team >  p.dis:hover,.team >  p.nm:hover{
         border:1px solid #eee;
         opacity: .7;
     }
+    <% } %>
     .team > p > i.edit{
         position: absolute;
         font-size:10px;
@@ -78,9 +84,11 @@
         right:0; top:0;
         color:white;
     }
+    <% if(data =='admin'){ %>
     .team > p:hover >i.edit{
         display: block;
     }
+    <% } %>
     /*  */
     #team{
         margin-top:30px;
@@ -140,6 +148,7 @@
 <script type="text/javascript">
     (function(){
         //deleteing
+        <% if(data =='admin'){ %>
         $('#fild_data').on('click','.team>i',function(e){
             var id = $(this).data('val');
             var ths = $(this);
@@ -194,6 +203,7 @@
        
                });
         });
+        <% } %>
         function getteam(){
             $.ajax({
                 url: "/teams/get",

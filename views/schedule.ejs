@@ -1,3 +1,4 @@
+<% if(data =='admin'){ %>
 <div id="team">
     <h3>Create Schedule</h3>
     <form id="teamform" class="clearFix">
@@ -28,7 +29,7 @@
                 <tr>
                     <td>Team B </td>
                     <td>: 
-                        <select name="team1" class="inp" >
+                        <select name="team2" class="inp" >
                             <% if(team.length > 0){ 
                                 team.forEach(function(ele){
                             %>
@@ -51,13 +52,14 @@
             
     </form>   
 </div>
+<% } %>
 <datalist id="browsers"></datalist>
     
     </datalist>
 <div id="fild_data" class="clearFix">
     
     <!-- <div class="schedule"> -->
-        <div class="schedule">
+        <!-- <div class="schedule">
             <p >
                 <i>x</i>
                 <span class="nm">Team A</span>
@@ -78,7 +80,7 @@
                     <span class="nm">Team B</span>
                 </p>
                 <p class="dtl">12 feb 2018 , sanfancisco</p>
-            </div>
+            </div> -->
     <!-- </div> -->
    
 </div>
@@ -103,9 +105,11 @@
         cursor: pointer;
         display: none;
     }
+    <% if(data =='admin'){ %>
     .schedule:hover p> i{
         display:block;
     }
+    <% } %>
     .dtl{
         border:none;
         font-size:12px;
@@ -129,60 +133,7 @@
         margin-top: 20px;
         padding: 0 15px;
     }
-    /* .team{
-        position: relative;
-        width:200px;
-        border:1px solid #d1d1d1;
-        padding:10px;
-        float:left;
-        margin-right:10px; margin-bottom:10px;
-    }
-    .team > img{
-        width:100%;
-        height:150px;
-    }
-    .team > i{
-        position:absolute;
-        background-color:red;
-        color:white;
-        font-family: Arial, Helvetica, sans-serif;
-        right:0; top:0;
-        padding:1px 5px;
-        cursor:pointer;
-        display: none;
-    }
-    .team:hover i{
-        display: block;
-    }
-    .team >  p.nm{
-        position: relative;
-        font-size:1.4em;
-        text-align: center;
-        padding:12px 2px 6px;
-    }
-    .team >  p.dis{
-        position: relative;
-        font-size:.9em;
-        text-align: center;
-        padding:2px;
-    }
-    .team >  p.dis:hover,.team >  p.nm:hover{
-        border:1px solid #eee;
-        opacity: .7;
-    }
-    .team > p > i.edit{
-        position: absolute;
-        font-size:10px;
-        display: none;
-        background-color:red;
-        padding:2px 4px;
-        cursor: pointer;
-        right:0; top:0;
-        color:white;
-    }
-    .team > p:hover >i.edit{
-        display: block;
-    } */
+    
     /*  */
     #team{
         margin-top:30px;
@@ -242,6 +193,7 @@
 <script type="text/javascript">
     (function(){
         //deleteing
+        <% if(data =='admin'){ %>
         $('#fild_data').on('click','.team>i',function(e){
             var id = $(this).data('val');
             var ths = $(this);
@@ -272,16 +224,18 @@
 
         });
         $('#teamform').submit(function(e){
+            e.preventDefault();    
             let data = $(this).serialize();
-            e.preventDefault();       
+              
                $.ajax({
                    url: "schedule/create",
                    type: "POST",
-                   data: data,
-                  
-                   contentType: 'json',
+                   data: data,                  
+                //    contentType: 'json',
+                //    dataType:'application/json',
                   
                    success: function(response) {
+                    getteam();
                         console.log(response);
                    },
                    error: function(jqXHR, textStatus, errorMessage) {
@@ -290,20 +244,27 @@
        
                });
         });
+        <% } %>
         function getteam(){
             $.ajax({
-                url: "/teams/get",
+                url: "/schedule/get",
                 type: "GET",        
                 contentType: 'json',
                 success: function(res) {
+                    console.log(res);
                     let ele = "";
                 if(res.length > 0){
                     res.forEach(function(el){
-                        ele += '<div class="team"><i data-val="'+el._id+'">x</i>';
-                        ele += '<img src="'+el.imgLink+'">';
-                        ele += '<p class="nm" ><i class="edit">edit</i><span>'+el.name+'</span></p>';
-                        ele += '<p class="dis" ><i class="edit">edit</i><span>'+el.description+'</span></p>';
-                        ele += '</div>';
+                        ele += '<div class="schedule"><p><i data-id="'+el._id+'">x</i>';
+                        ele += '<span class="nm">'+el.team1.name+'</span>';
+                        ele += '<span class="imgs"><img src="'+el.team1.imgLink+'"> </span>';
+                        ele += '<span class="cl">:</span>'
+                        ele += '<span class="imgs"><img src="'+el.team2.imgLink+'"></span>';
+                        ele += '<span class="nm">'+el.team2.name+'</span>';
+                        ele += '</p>';
+                        ele += '<p class="dtl">'+el.dateTime+' , '+el.location+'</p></div>';
+
+
                     });
                     $('#fild_data').empty().append(ele);
                 }
@@ -315,7 +276,7 @@
 
             });
         }
-        // getteam();
+        getteam();
 
 
 

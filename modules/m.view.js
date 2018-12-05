@@ -5,5 +5,10 @@ module.exports = {
         db.teams.find({},(err,data)=>{
             cb(err,data);
         });
+    },
+    profile : function(id,cb){
+        db.users.findById(id,(err,data)=>{
+            cb(err,data);
+        });
     }
 };

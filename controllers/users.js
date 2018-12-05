@@ -55,6 +55,11 @@ route.post('/register',(req,res)=>{
             }
             else{
                 res.json(validate.getError());  
+                res.writeHead(302, {
+                    'Location': '/'
+                });
+                res.end();
+                
             }
         }
         else{
@@ -75,9 +80,13 @@ route.post('/login',(req,res)=>{ // validate user only if not loged in
         
             users.validateUser(req.body.email,req.body.password,(err,data)=>{
                 if(err){
-                    if(err==='invalid') res.status(203).end('invalid username or password');
-                    else if(err==='disabled') res.status(203).end('user is disabled');
-                    else res.status(500).end();
+                    res.writeHead(302, {
+                        'Location': '/'
+                    });
+                    res.end();
+                    // if(err==='invalid') res.status(203).end('invalid username or password');
+                    // else if(err==='disabled') res.status(203).end('user is disabled');
+                    // else res.status(500).end();
                 }
                 else{
                 
