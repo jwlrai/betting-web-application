@@ -1,7 +1,7 @@
 const express   = require('express');
 const route     = express.Router();
 const users     = require('../modules/m.users');
-const validate  = require('../modules/m.validator');
+const formValidate  = require('../modules/m.validator');
 
 
 route.get('/p/:pageNo/s/:state',(req,res)=>{
@@ -29,17 +29,20 @@ route.get('/p/:pageNo/s/:state',(req,res)=>{
     }
 });
 route.post('/register',(req,res)=>{
+    const validate = new formValidate.validate();
     if(!req.xhr){
         if(res.locals.userData===null){ // creates user only if its not logedin
+            // validate.emptyRules();
             validate.setRules('Name',req.body.name,'alphaNumericSpace','name');
             validate.setRules('Address',req.body.address,'alphaNumericSpace','address');
             validate.setRules('email',req.body.email,'email','email');
             validate.setRules('phone',req.body.phone,'numeric','phone');
-            validate.setRules('password',req.body.password,'istring','password'); 
-            if(validate.exec()){
-            obj = validate.getData();
-            obj.fund = 0;
-            obj.active = 1;
+            validate.setRules('password',req.body.password,'istring','password');
+           
+            if(validate.execute()){
+                obj = validate.getData();
+                obj.fund = 0;
+                obj.active = 1;
                 users.userCreate(obj,function(err,data){
                     if(err){
                         res.status(500).end();
@@ -54,11 +57,12 @@ route.post('/register',(req,res)=>{
                 });
             }
             else{
-                res.json(validate.getError());  
-                res.writeHead(302, {
-                    'Location': '/'
-                });
-                res.end();
+            console.log(validate.getError());
+                res.status(400).json(validate.getError());  
+                // res.writeHead(302, {
+                //     'Location': '/'
+                // });
+                // res.end();
                 
             }
         }
