@@ -10,16 +10,21 @@
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae explicabo nisi, error atque facilis quidem. Enim consectetur quos nihil dignissimos nulla temporibus cumque a quibusdam incidunt, explicabo</p>
             </section>
             <section class="lgt-sec-sgn" id="twentyfive">
-                <h2>Sign Up</h2>
+                
                 <form  class="foam" action="/users/register"    method="POST">
+                <div id="devo">
+                    <h2>Sign Up</h2>
                     <p><input class="inp foamy" placeholder="Full Name" autocomplete="off" type="text" name="name" /></p>
                     
                     <p><input class="inp foamy" required placeholder="Address" type="text" name="address" /></p>
                     <p><input class="inp foamy" required placeholder="Email" type="email" name="email" /></p>
                     <p><input class="inp foamy" required placeholder="Phone Number" type="phone" name="phone" /></p>
                     <p><input class="inp foamy" required placeholder="Password" type="password" name="password" /></p>
-                    <p><input class="btn btnmain" required type="submit" value="Sign Up" /><input type="reset" class="btn" value="Reset"/></p>
-
+                    <div class="buttons">
+                        <p><input class="btn btnmain" required type="submit" value="Sign Up"/></p>
+                        <p><input type="reset" class="btn reset" value="Reset"/></p>
+                    </div>
+                </div>
                 </form>
             </section>
         </div>

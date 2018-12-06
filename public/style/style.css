@@ -5,9 +5,10 @@
 }
 
 html,body{
-    width:100%;
+    width: 100vw;
     min-height: 100vh;
     font-family: 'Roboto', sans-serif;
+    overflow: scroll;
 }
 .floatLeft{
     float:left;
@@ -46,17 +47,33 @@ html,body{
     background-image: linear-gradient(to bottom, #fafbfc, #cde0ee);
     background-repeat: repeat-x;
     background-size: 110% 110%;
-    width:auto !important;
+    width: auto !important;
     font-family: 'Roboto', sans-serif;
     margin-left: 0.3vw;
 }
 .btnmain{
-    background-color: #eff3f6;
+    /* background-color: #eff3f6;
     background-image: -webkit-linear-gradient(top, #fafbfc, #a83535);
-    background-image: -moz-linear-gradient(top, #fafbfc, #a83535); /*e4ebf0*/
+    background-image: -moz-linear-gradient(top, #fafbfc, #a83535);
     background-image: linear-gradient(to bottom, #fafbfc, #a83535);
-    background-repeat: repeat-x;
+    background-repeat: repeat-x; */
+    background: #F7B632;
+    color: black;
+    width: 100%;
 }
+.reset {
+    background: #F7B632;
+    color: black;
+    margin-right: 0 !important;
+    width: 60%;
+}
+.buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: auto;
+}
+
 .inp{
     border-color: #bdc7d8;
 border-radius: 3px;
@@ -243,11 +260,16 @@ nav > ul>li:hover> a,nav > ul>li>ul li:hover a{
     .lgt {
         display: flex;
         flex-direction: column-reverse;
-        margin-left: 1vw;
+        /* margin-left: 1vw; */
     }
     .lgt-sec-sgn {
         display: flex;
         flex-direction: column;
+    }
+    .lgt-sec-abt {
+        width: 90vw;
+        padding-left: 2vw;
+
     }
     .foam {
         display: flex;
@@ -261,6 +283,14 @@ nav > ul>li:hover> a,nav > ul>li>ul li:hover a{
     }
     p {
         width: 100%;
+    }
+    .buttons {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .reset {
+        margin-right: 0 !important;
     }
 
 }
@@ -292,10 +322,14 @@ nav > ul>li:hover> a,nav > ul>li>ul li:hover a{
         padding: 0 2vw;
     }
     .lgt-sec-sgn form input {
-        width: 35em;
+        /* width: 35em; */
     }
-    .lgt-sec-sgn {
-        display: flex;
+    #devo {
+        /* display: flex;
+        flex-direction: column;
         justify-content: center;
+        align-items: center;
+        margin: auto; */
     }
+
 }
