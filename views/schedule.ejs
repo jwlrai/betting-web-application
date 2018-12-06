@@ -116,9 +116,11 @@
         display: none;
         cursor: pointer;
     }
+    <% if(data =='admin'){ %>
     .enclosure:hover i.close{
         display: block;
     }
+    <% } %>
     .vs-and-location {
         display: flex;
         flex-direction: column;
