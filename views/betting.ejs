@@ -17,45 +17,7 @@
         
    
     </div>
-<div class="betting-page">
-    <div class="topbar">
-        <h1>Saturday December 8th</h1>
-        <h1>19:30 ET</h1>
-        <h1>State Farm Arena, Atlanta GA</h1>
-    </div>
-    <div class="basketball-schedule">
-        <div class="home-team-info">
-            <h2 class="home-team">Toronto Raptors</h2>
-            <img class="home-team-image" src="images/teamImages/torontoRaptors.jpeg" alt="Houston Rockets">
-            <form>
-                <div class="poolpot">
-                    <p class="pool">POOL:</p><h2 class="pot">$100.00</h2>
-                </div>
-                <div class="dollar">
-                    <p class="sign">$</p><input class= "stake" type="text" id="name" name="user_name" placeholder="STAKE">
-                </div>
-                <button class="bet">BET</button>
-            </form>
-        </div>
-        <div class="vs-and-location">
-            <p class="vs">VS</p>
-        </div>
-        <div class="away-team-info">
-            <h2 class="away-team">Dallas Mavericks</h2>
-            <img src="images/teamImages/dallasMavericks.jpeg" alt="Dallas Mavericks">
-            <form>
-                <div class="poolpot">
-                        <p class="pool">POOL:</p><h2 class="pot">$100.00</h2>
-                </div>
-                <div class="dollar">
-                        <p class="sign">$</p><input class= "stake" type="text" id="name" name="user_name" placeholder="STAKE">
-                </div>
-                <button class="bet">BET</button>
-            </form>
-        </div>
-    </div>
 
-</div>
 <div class="betting-page">
     <div class="topbar">
         <h1 class="data">Saturday December 8th</h1>
@@ -300,6 +262,7 @@
         var matches = <%- JSON.stringify(betting) %>;
         $('#bettingform').submit(function(e){
             e.preventDefault();
+
             var matchid = $('#schSel').val();
             if(matchid !='none'){
                 matches.forEach(function(ele){
@@ -312,8 +275,47 @@
                                 team2 : ele.team2,
                                 matchId : matchid
                             },
-                            success: function(response) {
-                                  console.log(response);
+                            success: function(res) {
+                                $('#schSel').children('option:selected').remove();
+                                
+                                ele = '<div class="betting-page">';
+                                ele +='<div class="topbar">';
+                                ele +='<h1>'+res[0].matchId.dateTime+' : '+res[0].matchId.location+'</h1>';
+                                ele +='</div>';
+                                ele +='<div class="basketball-schedule">';
+                                ele +='<div class="home-team-info">';
+
+                                ele +='<h2 class="home-team">'+res[0].teamId.name+'</h2>';
+                                ele +='<img class="home-team-image" src="'+res[0].teamId.imgLink+'" alt="Houston Rockets">';
+                                ele +='<form>';
+                                ele +='<div class="poolpot">';
+                                ele +='<p class="pool">POOL:</p><h2 class="pot">$<span>'+res[0].amount+'</span></h2>';
+                                ele +='</div>';
+                                ele +='<div class="dollar">';
+                                ele +='<p class="sign">$</p><input class= "stake" type="text" id="name" name="user_name" placeholder="STAKE">';
+                                ele +='</div>';
+                                ele +='<button class="bet" data-id="'+res[0]._id+'">BET</button>';
+                                ele +='</form>';
+                                ele +='</div>';
+                                ele +='<div class="vs-and-location"><p class="vs">VS</p></div>';
+                                ele +='<div class="away-team-info">';
+                                ele +='<h2 class="away-team">'+res[1].teamId.name+'</h2>';
+                                ele +='<img src="'+res[1].teamId.imgLink+'" alt="Dallas Mavericks">';
+                                ele +='<form>';
+                                ele +='<div class="poolpot">';
+                                ele +='<p class="pool">POOL:</p><h2 class="pot">$<span>'+res[1].amount+'</span></h2>';
+                                ele +='</div>';
+                                ele +='<div class="dollar">';
+                                ele +='<p class="sign">$</p><input class= "stake" type="text" id="name" name="user_name" placeholder="STAKE">';
+                                ele +='</div>'
+                                ele +='<button class="bet" data-id="'+res[1]._id+'">BET</button>';
+                                ele +='</form>';
+                                ele +='</div>';
+                                ele +='</div>';
+                                ele +='<div>';
+                                // //////////////////
+                                $('#fild_data').empty().append(ele);
+                                //   console.log(res);
                             },
                             error: function(jqXHR, textStatus, errorMessage) {
                                 
@@ -325,6 +327,37 @@
             }
             
            
+        });
+        
+        $('#fild_data').on('click','.betting-page .basketball-schedule .bet',function(e){
+            e.preventDefault();
+           
+            var poolId = $(this).data('id');
+            var amount = $(this).siblings('div.dollar').children('input').val();
+            var polamt = $(this).siblings('div.poolpot').children('h2').children('span').empty();
+            console.log(amount);
+            console.log(poolId);
+            // return;
+            $.ajax({
+                   url: "betting/makeBet",
+                   type: "POST",
+                   data: {
+                        poolId : poolId,
+                        amount : amount
+   
+                   },
+                  
+                   success: function(response) {
+                       polamt.text(parseFloat(response.amount));
+                       console.log(response);
+                        // getteam();
+                        
+                   },
+                   error: function(jqXHR, textStatus, errorMessage) {
+                       
+                   }
+       
+            });
         });
        
     })();

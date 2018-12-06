@@ -63,7 +63,7 @@
         var tpe = $.trim($(this).parent('td').children('input.rl').attr('name'));
         console.log(tpe);
         if(prv !==cur){
-            $('#loading').show();
+            // $('#loading').show();
             if($(this).parent('td').children('input').length==2){
                 var pass = $.trim($(this).parent('td').children('input.pass').val());
                if(pass.replace(/\s/g, "") !==''){
@@ -76,13 +76,13 @@
                         },
                         success: function(res) {
                             prvele.attr('data-val',cur);
-                            setTimeout(function(){  $('#loading').hide();  }, 800);
+                            // setTimeout(function(){  $('#loading').hide();  }, 800);
                             $('table tr td input.pass').removeClass('brd').hide();
                             $('table tr td input.rl').removeClass('brd');
                         },
                         error: function(jqXHR, textStatus, errorMessage) {
                             ths.text(preData);
-                            setTimeout(function(){  $('#loading').hide();  }, 800);
+                            // setTimeout(function(){  $('#loading').hide();  }, 800);
                             eles.val(prv);
                             $('table tr td input.pass').removeClass('brd').hide();
                             $('table tr td input.rl').removeClass('brd');
@@ -104,13 +104,13 @@
                         },
                         success: function(res) {
                             prvele.attr('data-val',cur);
-                            setTimeout(function(){  $('#loading').hide();  }, 800);
+                            // setTimeout(function(){  $('#loading').hide();  }, 800);
                             $('table tr td input.pass').removeClass('brd').hide();
                             $('table tr td input.rl').removeClass('brd');
                         },
                         error: function(jqXHR, textStatus, errorMessage) {
                             eles.val(prv);
-                            setTimeout(function(){  $('#loading').hide();  }, 800);
+                            // setTimeout(function(){  $('#loading').hide();  }, 800);
                             $('table tr td input.pass').removeClass('brd').hide();
                             $('table tr td input.rl').removeClass('brd');
                         }

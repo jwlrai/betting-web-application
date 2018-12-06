@@ -37,13 +37,21 @@ route.post(`/makeBet`, (req, res) => {
     const amount = req.body.amount;
     const userId = res.locals.userData.id;
     const userAmount = res.locals.userData.fund - amount;
-    betting.makeBet(poolId, amount, userId, userAmount, (err, data) => {
-        if (err) {
-            res.status(500).end();
-        } else {
-            res.json(data);
-        };
-    });
+    console.log(userId);
+
+    if(userAmount < 0 ){
+        res.end('no_fund');
+    }
+    else{
+        betting.makeBet(poolId, amount, userId, userAmount, (err, data) => {
+            if (err) {
+                res.status(500).end();
+            } else {
+                res.json(data);
+            };
+        });
+    }
+    
 });
 
 // route.put()

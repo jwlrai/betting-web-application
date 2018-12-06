@@ -16,7 +16,10 @@ module.exports = {
             if (err) {
                 cb(err, null);
             } else {
-                cb(false, data);
+                db.betting.find({matchId: data.matchId}).populate('teamId').populate('matchId').exec((res,bdata)=>{
+                    cb(false, bdata);
+                });;
+               
             };
         });
     },
@@ -33,13 +36,17 @@ module.exports = {
         });
     },
     makeBet: function(poolId, amount, userId, userFund, cb) {
+        console.log(userId);
+        console.log(poolId);
+        console.log(amount);
+        console.log(userFund);
         db.betting.findById(poolId, (err, pdata) => {
             if (err) {
                 cb(err, null);
             } else {
                 const sum = pdata.amount + amount;
 
-                db.betting.findByIdAndUpdate(poolId, {amount:sum}, (err, data) => {
+                db.betting.findByIdAndUpdate(poolId, {amount:sum}, (err,pldata) => {
                     if (err) {
                         cb(err, null);
                     } else {
@@ -53,7 +60,7 @@ module.exports = {
                             }, 
                             (err, data) => {
                                 if (err) { cb(err, null);} 
-                                else { cb(false, data);}
+                                else { cb(false,{amount:sum});}
                             });
                         });
                     }
