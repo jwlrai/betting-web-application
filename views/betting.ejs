@@ -18,7 +18,11 @@
    
     </div>
 <div class="betting-page">
-    <h1 class="date">Saturday December 8th | 18:00 | American Airlines Center, Dallas, TX</h1>
+    <div class="topbar">
+        <h1>Saturday December 8th</h1>
+        <h1>19:30 ET</h1>
+        <h1>State Farm Arena, Atlanta GA</h1>
+    </div>
     <div class="basketball-schedule">
         <div class="home-team-info">
             <h2 class="home-team">Toronto Raptors</h2>
@@ -53,11 +57,53 @@
 
 </div>
 <div class="betting-page">
-        <h1 class="date">Saturday December 8th | 19:30 | State Farm Arema, Atlanta, GA</h1>
+    <div class="topbar">
+        <h1 class="data">Saturday December 8th</h1>
+        <h1 class="time">19:30 ET</h1>
+        <h1 class="location">State Farm Arena, Atlanta GA</h1>
+    </div>
+    <div class="basketball-schedule">
+        <div class="home-team-info">
+            <h2 class="home-team">Denver Nuggets</h2>
+            <img class="home-team-image" src="images/teamImages/denverNuggets.jpeg" alt="Houston Rockets">
+            <form>
+                <div class="poolpot">
+                    <p class="pool">POOL:</p><h2 class="pot">$100.00</h2>
+                </div>
+                <div class="dollar">
+                    <p class="sign">$</p><input class= "stake" type="text" id="name" name="user_name" placeholder="STAKE">
+                </div>
+                <button class="bet">BET</button>
+            </form>
+        </div>
+        <div class="vs-and-location">
+            <p class="vs">VS</p>
+        </div>
+        <div class="away-team-info">
+            <h2 class="away-team">Atlanta Hawks</h2>
+            <img src="images/teamImages/atlantaHawks.jpeg" alt="Dallas Mavericks">
+            <form>
+                <div class="poolpot">
+                        <p class="pool">POOL:</p><h2 class="pot">$100.00</h2>
+                </div>
+                <div class="dollar">
+                        <p class="sign">$</p><input class= "stake" type="text" id="name" name="user_name" placeholder="STAKE">
+                </div>
+                <button class="bet">BET</button>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="betting-page">
+    <div class="topbar">
+        <h1 class="data">Saturday December 8th</h1>
+        <h1 class="time">19:30 ET</h1>
+        <h1 class="location">State Farm Arena, Atlanta GA</h1>
+    </div>
         <div class="basketball-schedule">
             <div class="home-team-info">
-                <h2 class="home-team">Denver Nuggets</h2>
-                <img class="home-team-image" src="images/teamImages/denverNuggets.jpeg" alt="Houston Rockets">
+                <h2 class="home-team">Washington Wizards</h2>
+                <img class="home-team-image" src="images/teamImages/washingtonWizards.jpeg" alt="Houston Rockets">
                 <form>
                     <div class="poolpot">
                         <p class="pool">POOL:</p><h2 class="pot">$100.00</h2>
@@ -72,8 +118,8 @@
                 <p class="vs">VS</p>
             </div>
             <div class="away-team-info">
-                <h2 class="away-team">Atlanta Hawks</h2>
-                <img src="images/teamImages/atlantaHawks.jpeg" alt="Dallas Mavericks">
+                <h2 class="away-team">Cleveland Cavaliers</h2>
+                <img src="images/teamImages/clevelandCavaliers.jpeg" alt="Dallas Mavericks">
                 <form>
                     <div class="poolpot">
                             <p class="pool">POOL:</p><h2 class="pot">$100.00</h2>
@@ -85,7 +131,6 @@
                 </form>
             </div>
         </div>
-    
     </div>
 
 
@@ -94,6 +139,20 @@
 
 
 <style>
+
+
+    .locationdiv {
+        display: flex;
+        justify-content: flex-end;
+    }
+    .topbar {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        background-color: black;
+        color:#F7B632;
+        font-size: 1.5vh;
+    }
     form {
         display: flex;
         flex-direction: column;
@@ -156,11 +215,12 @@
         text-align: center;
     }
     .date {
-        background-color: #F7B632;
-        padding: 5px 0 5px 25px;
+        background-color: black;
+        padding: 5px 25px;
         margin-top: 5px;
         font-size: 20px;
         text-align: center;
+        color: #F7B632;
     }
     .location {
         margin-right: 2vw;
@@ -202,7 +262,7 @@
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
-        width: 40vw;
+        width: 20vw;
     }
 
     .away-team-info {
@@ -210,7 +270,7 @@
         flex-direction: column;
         justify-content: flex-end;
         align-items: flex-end;
-        width: 40vw;
+        width: 20vw;
     }
 
     img {
