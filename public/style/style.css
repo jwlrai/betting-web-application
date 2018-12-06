@@ -48,6 +48,7 @@ html,body{
     background-size: 110% 110%;
     width:auto !important;
     font-family: 'Roboto', sans-serif;
+    margin-left: 0.3vw;
 }
 .btnmain{
     background-color: #eff3f6;
@@ -63,6 +64,7 @@ margin: 0;
 color: #262728;
 border: 1px solid #bdc7d8;
 }
+
 
 a{
     text-decoration: none;
@@ -91,9 +93,14 @@ body>header >div h1 a{
 }
 body>header >div input{
     padding:.3em .8em;
-    margin-left:10px !important;
+    margin-left:10px;
     height: 28px;
 }
+
+.inp {
+    margin-left: 0.5vw;
+}
+
 body>header >div button{
     padding:.4em 1em;
     height: 28px;
@@ -140,7 +147,7 @@ h2{
 }
 .lgt-sec-sgn form input{
     padding:.6em 1em;
-    width:300px;
+    width: 27em;
     margin-bottom:10px;
 }
 
@@ -197,8 +204,8 @@ nav > ul>li:last-child ul{
     display: none;
 }
 nav > ul>li:last-child:hover ul{
- display: block;
-   
+    display: block;
+
 }
 nav > ul>li:last-child ul li{
     padding:6px 15px;
@@ -208,4 +215,80 @@ nav > ul>li:last-child ul li{
 }
 nav > ul>li:hover> a,nav > ul>li>ul li:hover a{
     color:#7571eb;
+}
+
+@media screen and (max-width: 1150px) {
+    .top {
+        display: flex;
+        flex-direction: row;
+    }
+    .container {
+        width: 100%;
+    }
+    .harry {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .floatLeft {
+        margin-left: 2vw;
+    }
+    form {
+        margin-right: 2vw;
+    }
+    .lgt-sec-abt {
+        margin: 0 1vw;
+        width: 95%;
+    }
+    .lgt {
+        display: flex;
+        flex-direction: column-reverse;
+        margin-left: 1vw;
+    }
+    .lgt-sec-sgn {
+        display: flex;
+        flex-direction: column;
+    }
+    .foam {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        width: 100vw;
+    }
+    .foamy {
+        width: 100vw;
+    }
+    p {
+        width: 100%;
+    }
+
+}
+
+@media screen and (max-width: 527px) {
+    .harry {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    form {
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+        width: 100%;
+
+    }
+    .password {
+        margin: 5px 0;
+    }
+    .btn {
+        width: 100%;
+    }
+    .email {
+        margin-left: 0;
+    }
+    .floatRight {
+        width: 100%;
+        padding: 0 2vw;
+    }
 }
