@@ -1,7 +1,26 @@
 const db = require(`../models`);
 
 module.exports = {
-
+    getPool : function(cb){
+        db.betting.find({}).populate('teamId').populate('matchId').exec((err,data)=>{
+            if(err){
+                cb(err,null);
+            }else{
+                var pool = {};
+                if(data.length > 0){
+                    data.forEach((ele)=>{
+                        if(pool[ele.matchId._id] == undefined){
+                            pool[ele.matchId._id] = [ele];
+                        }else{
+                            pool[ele.matchId._id].push(ele);
+                        }
+                    
+                    });
+                }
+                cb(false,pool);
+            }
+        });
+    },
     createPool: function(team1, team2, matchId, cb) {
         db.betting.create( {
             amount: 0,
@@ -36,10 +55,7 @@ module.exports = {
         });
     },
     makeBet: function(poolId, amount, userId, userFund, cb) {
-        console.log(userId);
-        console.log(poolId);
-        console.log(amount);
-        console.log(userFund);
+        
         db.betting.findById(poolId, (err, pdata) => {
             if (err) {
                 cb(err, null);
@@ -114,7 +130,9 @@ module.exports = {
                             cb(err, null);
                         } else {
                             const obj = {amount: wdata.amount+amount};
-                            db.users.findByIdAndUpdate(userId, obj);
+                            db.users.findByIdAndUpdate(userId, obj,(err,updata)=>{
+                                cb(err,updata);
+                            });
                         }
                     })
                 });
