@@ -65,7 +65,11 @@ route.post(`/makeBet`, (req, res) => {
 
 route.put('/setwinner/:poolId',(req,res)=>{
     betting.distributeFunds(req.params.poolId,(err,data)=>{
-        
+        if(err){
+            res.status(500).end();
+        }else{
+            res.json(data);
+        }
     });
 });
 

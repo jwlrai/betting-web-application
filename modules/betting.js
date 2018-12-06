@@ -2,7 +2,7 @@ const db = require(`../models`);
 
 module.exports = {
     getPool : function(cb){
-        db.betting.find({}).populate('teamId').populate('matchId').exec((err,data)=>{
+        db.betting.find({active:1}).populate('teamId').populate('matchId').exec((err,data)=>{
             if(err){
                 cb(err,null);
             }else{
@@ -25,12 +25,14 @@ module.exports = {
         db.betting.create( {
             amount: 0,
             teamId: team1,
-            matchId: matchId
+            matchId: matchId,
+            active:1
         },
         {
             amount: 0,
             teamId: team2,
-            matchId: matchId
+            matchId: matchId,
+            active:1
         }, (err, data) => {
             if (err) {
                 cb(err, null);
@@ -94,19 +96,29 @@ module.exports = {
                         cb(err, null);
                     } else {
                         let obj = {};
+                        let pools = [];
                         hdata.forEach((element) => {
                             if (element._id == poolId) {
+                                
                                 obj.win = element.amount;
                             } else {
                                 obj.lose = element.amount;
                             }
+                            pools.push(element._id);
                         });
-                        const ratio = obj.los/obj.win;
+                        console.log(pools);
+                        const ratio = parseFloat(obj.lose)/parseFloat(obj.win);
+                        console.log(ratio);
                         this.distributeToUser(ratio, poolId, (err, rdata) => {
                             if (err) {
                                 cb(err, null);
                             } else {
-                                cb(false, rdata);
+                                db.betting.findOneAndUpdate({_id:pools[0]},{active:0},(err,odata)=>{
+                                    db.betting.findOneAndUpdate({_id:pools[1]},{active:0},(err,odata)=>{
+                                        cb(false, rdata);
+                                    })
+                                })
+                               
                             }
                         });
                     }
@@ -121,6 +133,7 @@ module.exports = {
                 cb(err, null);
             } else {
                 const arr = [];
+                
                 data.forEach(element => {
                     const userId = element.userId;
                     const amount = element.amount*ratio;
@@ -129,7 +142,8 @@ module.exports = {
                         if (err) {
                             cb(err, null);
                         } else {
-                            const obj = {amount: wdata.amount+amount};
+                            console.log(wdata);
+                            const obj = {fund: wdata.fund+amount};
                             db.users.findByIdAndUpdate(userId, obj,(err,updata)=>{
                                 cb(err,updata);
                             });
