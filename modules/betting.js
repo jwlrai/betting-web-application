@@ -106,9 +106,9 @@ module.exports = {
                             }
                             pools.push(element._id);
                         });
-                        console.log(pools);
+                    
                         const ratio = parseFloat(obj.lose)/parseFloat(obj.win);
-                        console.log(ratio);
+                        
                         this.distributeToUser(ratio, poolId, (err, rdata) => {
                             if (err) {
                                 cb(err, null);
@@ -137,12 +137,12 @@ module.exports = {
                 data.forEach(element => {
                     const userId = element.userId;
                     const amount = element.amount*ratio;
-                    // arr.push({})
+                    
                     db.users.findById(userId, (err, wdata) => {
                         if (err) {
                             cb(err, null);
                         } else {
-                            console.log(wdata);
+                            
                             const obj = {fund: wdata.fund+amount};
                             db.users.findByIdAndUpdate(userId, obj,(err,updata)=>{
                                 cb(err,updata);

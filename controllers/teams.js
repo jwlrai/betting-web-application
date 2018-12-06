@@ -16,7 +16,7 @@ route.get(`/get`, (req, res) => {
     if (res.locals.userData !== null) {
         teams.getTeams((err, data) => {
             if (err) {
-                console.log(err);
+                
             } else {
                 res.json(data);
             };
@@ -34,7 +34,7 @@ route.post(`/create`, upload.single(`teamImg`), (req, res) => {
         const imgLink = `/images/upload/` + req.file.filename;
         teams.createTeams(teamName, description, imgLink, (err, data) => {
             if (err) {
-                console.log(err);
+                
             } else {
                 res.json(data);
             };
@@ -50,7 +50,7 @@ route.delete(`/:teamId`, (req, res) => {
         const teamId = req.params.teamId;
         teams.deleteTeams(teamId, (err, data) => {
             if (err) {
-                console.log(err);
+                
             } else {
                 res.json(data);
             };
@@ -63,10 +63,10 @@ route.delete(`/:teamId`, (req, res) => {
 
 route.put(`/edit/:teamId`, (req, res) => {
     if (res.locals.userData !== null && res.locals.userData.group == `admin`) {
-        console.log(`inside`);
+        
         const teamId = req.params.teamId;
         const teamName = req.body.teamName;
-        console.log(teamName);
+        
         const description = req.body.description;
         const updateData = {
         };
@@ -76,10 +76,10 @@ route.put(`/edit/:teamId`, (req, res) => {
         if (description !== undefined) {
             updateData.description = description;
         };
-        console.log(updateData);
+        
         teams.editTeams(teamId, updateData, (err, data) => {
             if (err) {
-                console.log(err);
+                
             } else {
                 res.json(data);
             };

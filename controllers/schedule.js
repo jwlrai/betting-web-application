@@ -6,7 +6,7 @@ route.get(`/get`, (req, res) => {
     if (res.locals.userData !== null) {
         schedule.getSchedule((err, data) => {
             if (err) {
-                console.log(err);
+                
             } else {
                 res.json(data);
             };
@@ -19,14 +19,14 @@ route.get(`/get`, (req, res) => {
 
 route.post(`/create`, (req, res) => {
     if (res.locals.userData !== null && res.locals.userData.group == `admin`) {
-        console.log(req);
+    
         const team1 = req.body.team1;
         const team2 = req.body.team2;
         const dateTime = req.body.dateTime;
         const location = req.body.location;
         schedule.createSchedule(team1, team2, dateTime, location, (err, data) => {
             if (err) {
-                console.log(err);
+                
             } else {
                 res.json(data);
             };
@@ -42,7 +42,7 @@ route.delete(`/:matchId`, (req, res) => {
         const matchId = req.params.matchId;
         schedule.deleteSchedule(matchId, (err, data) => {
             if (err) {
-                console.log(err);
+                
             } else {
                 res.json(data);
             };
@@ -57,10 +57,10 @@ route.put(`/edit/:matchId`, (req, res) => {
     if (res.locals.userData !== null && res.locals.userData.group == `admin`) {
         const matchId = req.params.matchId;
         const dateTime = req.body.dateTime;
-        console.log(dateTime);
+        
         schedule.editSchedule(matchId, {dateTime: dateTime}, (err, data) => {
             if (err) {
-                console.log(err);
+                
             } else {
                 res.json(data);
             };

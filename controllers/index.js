@@ -1,7 +1,6 @@
 const express   = require('express');
 const route     = express.Router();
 const users     = require('./users');
-const sports    = require('./sports');
 const auth      = require('../modules/m.auth');
 const views     = require('./views');
 const betting   = require('./betting');
@@ -35,9 +34,7 @@ route.use('/users',users);
 route.use(`/betting`, betting);
 route.use(`/teams`, teams);
 route.use(`/schedule`, schedule);
-// route.use(`/betting`, (req,res,next)=>{
-//     res.send('to betting');
-// });
+
 
 route.use('*', function(req, res,next){
     if(res.locals.userData === null){

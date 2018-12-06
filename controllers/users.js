@@ -32,7 +32,7 @@ route.post('/register',(req,res)=>{
     const validate = new formValidate.validate();
     if(!req.xhr){
         if(res.locals.userData===null){ // creates user only if its not logedin
-            // validate.emptyRules();
+            
             validate.setRules('Name',req.body.name,'alphaNumericSpace','name');
             validate.setRules('Address',req.body.address,'alphaNumericSpace','address');
             validate.setRules('email',req.body.email,'email','email');
@@ -57,7 +57,7 @@ route.post('/register',(req,res)=>{
                 });
             }
             else{
-            console.log(validate.getError());
+            
                 res.status(400).json(validate.getError());  
                 // res.writeHead(302, {
                 //     'Location': '/'
@@ -85,13 +85,13 @@ route.post('/login',(req,res)=>{ // validate user only if not loged in
             
             users.validateUser(req.body.email,req.body.password,(err,data)=>{
                 if(err){
-                    res.writeHead(302, {
-                        'Location': '/'
-                    });
-                    res.end();
-                    // if(err==='invalid') res.status(203).end('invalid username or password');
-                    // else if(err==='disabled') res.status(203).end('user is disabled');
-                    // else res.status(500).end();
+                    // res.writeHead(302, {
+                    //     'Location': '/'
+                    // });
+                    // res.end();
+                    if(err==='invalid') res.status(203).end('invalid username or password');
+                    else if(err==='disabled') res.status(203).end('user is disabled');
+                    else res.status(500).end();
                 }
                 else{
                 
@@ -135,7 +135,7 @@ route.put('/:userid/status/:type',(req,res)=>{
                     }
                 });
             }else{
-                console.log(/^[0-9a-zA-Z\s]+$/.test(req.params.userid));
+                
                 res.end('invalid');
             }
         }else{

@@ -46,7 +46,6 @@ route.post(`/makeBet`, (req, res) => {
     const amount = req.body.amount;
     const userId = res.locals.userData.id;
     const userAmount = res.locals.userData.fund - amount;
-    console.log(userId);
 
     if(userAmount < 0 ){
         res.end('no_fund');

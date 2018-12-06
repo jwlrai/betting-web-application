@@ -56,7 +56,7 @@ route.get('/page/bettings',(req,res)=>{
         views.betting(function(err,sdata){
             res.render('betting',{data : res.locals.userData.group,betting:sdata});
         });
-        // res.render('betting',{data : res.locals.userData.group});
+        
     }else{
         res.status(403).end();
     }
