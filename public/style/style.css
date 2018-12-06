@@ -274,7 +274,7 @@ nav > ul>li:hover> a,nav > ul>li>ul li:hover a{
     form {
         display: flex;
         flex-direction: column;
-        margin: auto;
+        /* align-items: center; */
         width: 100%;
 
     }
@@ -290,5 +290,12 @@ nav > ul>li:hover> a,nav > ul>li>ul li:hover a{
     .floatRight {
         width: 100%;
         padding: 0 2vw;
+    }
+    .lgt-sec-sgn form input {
+        width: 35em;
+    }
+    .lgt-sec-sgn {
+        display: flex;
+        justify-content: center;
     }
 }
