@@ -20,9 +20,9 @@ route.use('/',function(req,res,next){  //routing level middleware for authentica
                 res.status(403).end();
             }
             else{
-               res.locals.userData = data;
-               
-               next();
+            res.locals.userData = data;
+
+            next();
             }
         });
     }
@@ -47,7 +47,7 @@ route.use('*', function(req, res,next){
         res.status(404).end("no result found");
     }
     
-   
+
 });
 
 module.exports = route;

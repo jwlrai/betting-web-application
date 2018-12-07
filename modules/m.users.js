@@ -147,7 +147,7 @@ module.exports = {
             if(err){
                 cb(err,null);
             }else{
-                console.log(data);
+                
                 if(type === data.active){
                     cb('nochange',null);
                 }else{

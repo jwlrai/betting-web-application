@@ -1,5 +1,6 @@
 const db =  require('./models');
 const bcrypt = require('bcrypt');
+<<<<<<< HEAD
 // remove all collection before initilize
 if(db.group != undefined && db.users != undefined){
 db.group.remove({});
@@ -18,6 +19,23 @@ db.betting.remove({});
 
 
 
+=======
+if(db.group != undefined && db.users != undefined){
+    db.group.remove({});
+    db.users.remove({});
+}
+if(db.schedule != undefined){
+    db.schedule.remove({});
+}
+
+if(db.teams != undefined){
+    db.teams.remove({});
+}
+if(db.betting != undefined){
+    db.betting.remove({});
+}
+
+>>>>>>> b1149f2038227dbce2c18e967102f3126265675d
 db.group.create([{
         name: 'admin',
         description:'system admin with all the privileges'

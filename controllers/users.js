@@ -5,15 +5,15 @@ const formValidate  = require('../modules/m.validator');
 
 
 route.get('/p/:pageNo/s/:state',(req,res)=>{
-   
+
     if(res.locals.userData !== null && res.locals.userData.group =='admin'){
-      
+    
         const status = {'enable':1,'disable':0};
         if(status[req.params.state]==undefined){
             res.status(404).end();
         }
         else{
-          
+        
             users.getUsers(req.params.pageNo,status[req.params.state],function(err,data){
                 if(err){
                     res.json({"message":"fail"});
@@ -38,7 +38,7 @@ route.post('/register',(req,res)=>{
             validate.setRules('email',req.body.email,'email','email');
             validate.setRules('phone',req.body.phone,'numeric','phone');
             validate.setRules('password',req.body.password,'istring','password');
-           
+        
             if(validate.exec()){
                 obj = validate.getData();
                 obj.fund = 0;
@@ -59,10 +59,6 @@ route.post('/register',(req,res)=>{
             else{
             
                 res.status(400).json(validate.getError());  
-                // res.writeHead(302, {
-                //     'Location': '/'
-                // });
-                // res.end();
                 
             }
         }
@@ -85,10 +81,7 @@ route.post('/login',(req,res)=>{ // validate user only if not loged in
             
             users.validateUser(req.body.email,req.body.password,(err,data)=>{
                 if(err){
-                    // res.writeHead(302, {
-                    //     'Location': '/'
-                    // });
-                    // res.end();
+
                     if(err==='invalid') res.status(203).end('invalid username or password');
                     else if(err==='disabled') res.status(203).end('user is disabled');
                     else res.status(500).end();
@@ -111,7 +104,7 @@ route.post('/login',(req,res)=>{ // validate user only if not loged in
         });
         res.end();
     }
-   
+
 });
 
 route.put('/:userid/status/:type',(req,res)=>{
