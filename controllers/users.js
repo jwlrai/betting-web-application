@@ -1,7 +1,7 @@
 const express   = require('express');
 const route     = express.Router();
 const users     = require('../modules/m.users');
-const validate  = require('../modules/m.validator');
+const formValidate  = require('../modules/m.validator');
 
 
 route.get('/p/:pageNo/s/:state',(req,res)=>{
@@ -29,17 +29,20 @@ route.get('/p/:pageNo/s/:state',(req,res)=>{
     }
 });
 route.post('/register',(req,res)=>{
+    const validate = new formValidate.validate();
     if(!req.xhr){
         if(res.locals.userData===null){ // creates user only if its not logedin
+            
             validate.setRules('Name',req.body.name,'alphaNumericSpace','name');
             validate.setRules('Address',req.body.address,'alphaNumericSpace','address');
             validate.setRules('email',req.body.email,'email','email');
             validate.setRules('phone',req.body.phone,'numeric','phone');
-            validate.setRules('password',req.body.password,'istring','password'); 
+            validate.setRules('password',req.body.password,'istring','password');
+           
             if(validate.exec()){
-            obj = validate.getData();
-            obj.fund = 0;
-            obj.active = 1;
+                obj = validate.getData();
+                obj.fund = 0;
+                obj.active = 1;
                 users.userCreate(obj,function(err,data){
                     if(err){
                         res.status(500).end();
@@ -54,11 +57,12 @@ route.post('/register',(req,res)=>{
                 });
             }
             else{
-                res.json(validate.getError());  
-                res.writeHead(302, {
-                    'Location': '/'
-                });
-                res.end();
+            
+                res.status(400).json(validate.getError());  
+                // res.writeHead(302, {
+                //     'Location': '/'
+                // });
+                // res.end();
                 
             }
         }
@@ -78,16 +82,16 @@ route.post('/register',(req,res)=>{
 route.post('/login',(req,res)=>{ // validate user only if not loged in
     if(!req.xhr){
         if(res.locals.userData===null){
-        
+            
             users.validateUser(req.body.email,req.body.password,(err,data)=>{
                 if(err){
-                    res.writeHead(302, {
-                        'Location': '/'
-                    });
-                    res.end();
-                    // if(err==='invalid') res.status(203).end('invalid username or password');
-                    // else if(err==='disabled') res.status(203).end('user is disabled');
-                    // else res.status(500).end();
+                    // res.writeHead(302, {
+                    //     'Location': '/'
+                    // });
+                    // res.end();
+                    if(err==='invalid') res.status(203).end('invalid username or password');
+                    else if(err==='disabled') res.status(203).end('user is disabled');
+                    else res.status(500).end();
                 }
                 else{
                 
@@ -112,6 +116,7 @@ route.post('/login',(req,res)=>{ // validate user only if not loged in
 
 route.put('/:userid/status/:type',(req,res)=>{
     if(res.locals.userData!==null && res.locals.userData.group ==='admin'){
+        const validate = new formValidate.validate();
         const type = ['disable','enable'];
         if(type.includes(req.params.type)){
             validate.setRules('parameter',req.params.userid,'alphaNumeric');
@@ -130,7 +135,7 @@ route.put('/:userid/status/:type',(req,res)=>{
                     }
                 });
             }else{
-                console.log(/^[0-9a-zA-Z\s]+$/.test(req.params.userid));
+                
                 res.end('invalid');
             }
         }else{
@@ -144,8 +149,8 @@ route.put('/:userid/status/:type',(req,res)=>{
 });
 
 route.put('/edit/:type',(req,res)=>{
-    if(res.locals.userData!==null && res.locals.userData=='user'){
-        
+    if(res.locals.userData!==null){
+        const validate = new formValidate.validate();
         const type = ['password','email','name','address','phone','fund'];
         validate.setRules('',req.params.type,'alpha');   
         if(validate.exec()){

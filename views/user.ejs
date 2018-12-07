@@ -2,10 +2,10 @@
     <div class="clearFix">
         <p class="floatLeft"> Sort User
         <select id="userSelect">
-            <option value="enable"> Enable </option>
-            <option value="disable"> Disable </option>
+            <option value="enable"> Enabled </option>
+            <option value="disable"> Disabled </option>
         </select></p>
-        <p class="floatRight" id="srt"> <span class="prev">< Previous</span> | <span class="nxt">next ></span>        </p>
+        <!-- <p class="floatRight" id="srt"> <span class="prev">< Previous</span> | <span class="nxt">next ></span>        </p> -->
     </div>
     <div id="fild_data" class="clearFix">
         
@@ -148,6 +148,7 @@
             'disable':'enable'
         },
         getUser: function(){
+            $('#loading').show();
             var opt = $('#userSelect').val();
             var ths = this;
             $.ajax({
@@ -165,10 +166,10 @@
                         eles += '</div>';
                     });
                     $('#fild_data').empty().append(eles);
-                
+                    setTimeout(function(){  $('#loading').hide();  }, 800);
                 },
                 error: function(jqXHR, textStatus, errorMessage) {
-                    
+                    setTimeout(function(){  $('#loading').hide();  }, 800);
                 }
 
             });
@@ -179,6 +180,7 @@
         var id = $(this).data('val');
         var status = $(this).text().toLocaleLowerCase();
         var ths = $(this);
+         $('#loading').show();
         $.ajax({
             url: "/users/"+id+"/status/"+status,
             type: "PUT",        
@@ -187,12 +189,12 @@
                 if(res=='sucess'){
                     ths.parents('div.user').remove();
                 }
-                
-            console.log('sucess');
+                setTimeout(function(){  $('#loading').hide();  }, 800);
+               console.log('sucess');
             
             },
             error: function(jqXHR, textStatus, errorMessage) {
-                
+                setTimeout(function(){  $('#loading').hide();  }, 800);
             }
 
         });

@@ -5,9 +5,18 @@ const betting = require(`../modules/betting`);
 
 //make query rules
 
+route.get('/pool',(req,res)=>{
+    betting.getPool((err,data)=>{
+        if(err){
+            res.status(500).end('error');
+        }else{
+            res.json(data);
+        }
+    });
+});
 route.post(`/create/pool`, (req, res) => {
 
-    console.log(`inside`);
+    
     const team1 = req.body.team1;
     const team2 = req.body.team2;
     const matchId = req.body.matchId;
@@ -37,16 +46,31 @@ route.post(`/makeBet`, (req, res) => {
     const amount = req.body.amount;
     const userId = res.locals.userData.id;
     const userAmount = res.locals.userData.fund - amount;
-    betting.makeBet(poolId, amount, userId, userAmount, (err, data) => {
-        if (err) {
-            res.status(500).end();
-        } else {
-            res.json(data);
-        };
-    });
+
+    if(userAmount < 0 ){
+        res.end('no_fund');
+    }
+    else{
+        betting.makeBet(poolId, amount, userId, userAmount, (err, data) => {
+            if (err) {
+                res.status(500).end();
+            } else {
+                res.json(data);
+            };
+        });
+    }
+    
 });
 
-// route.put()
+route.put('/setwinner/:poolId',(req,res)=>{
+    betting.distributeFunds(req.params.poolId,(err,data)=>{
+        if(err){
+            res.status(500).end();
+        }else{
+            res.json(data);
+        }
+    });
+});
 
 
 

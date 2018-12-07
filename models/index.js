@@ -6,7 +6,7 @@ const betting   = require('./db.betting');
 const matches   = require('./db.matches');
 const team      = require('./db.teams');
 const users     = require('./db.users');
-const beggingHistory = require('./db.group');
+const bettingHistory = require('./db.bettingHistory');
 const schedule = require(`./db.schedule`);
 
 module.exports = {
@@ -16,5 +16,5 @@ module.exports = {
     schedule: schedule,
     betting : betting,
     matches : matches,
-    beggingHistory : beggingHistory
+    bettingHistory : bettingHistory
 }

@@ -2,11 +2,11 @@
 <div id="team">
     <h3>Create Schedule</h3>
     <form id="teamform" class="clearFix">
-        <div class="floatLeft">
+        <div class="floatingLeft">
             <table>
                 <tr>
-                    <td>Team A </td>
-                    <td>: 
+                    <td>Home Team </td>
+                    <td> 
                         <select name="team1" class="inp" >
                             <% if(team.length > 0){ 
                                 team.forEach(function(ele){
@@ -19,15 +19,15 @@
                 </tr>
                 <tr>
                     <td>Date</td>
-                    <td>: <input class="inp" autocomplete="off" type="text" name="dateTime" /></td>
+                    <td> <input class="inp" autocomplete="off" type="text" name="dateTime" /></td>
                 </tr>
             </table>
         </div>
         <div class="floatRight">
             <table>
                 <tr>
-                    <td>Team B </td>
-                    <td>: 
+                    <td>Away Team </td>
+                    <td> 
                         <select name="team2" class="inp" >
                             <% if(team.length > 0){ 
                                 team.forEach(function(ele){
@@ -40,7 +40,7 @@
                 </tr>
                 <tr>
                     <td>Location</td>
-                    <td>: <input class="inp" autocomplete="off" type="text" name="location" /></td>
+                    <td> <input class="inp" autocomplete="off" type="text" name="location" /></td>
                 </tr>
             </table>
             <p>
@@ -52,50 +52,31 @@
     </form>   
 </div>
 <% } %>
-<datalist id="browsers"></datalist>
-    
-    </datalist>
+
 <div id="fild_data" class="clearFix">
-    <div class="enclosure">
-        <h1 class="date">Saturday, December 8th</h1>
-        <div class="basketball-schedule">
-            <div class="home-team-info">
-                <h2 class="home-team">Houston Rockets</h2>
-                <img class="home-team-image" src="images/teamImages/houstonRockets.jpeg" alt="Houston Rockets">
-            </div>
-            <div class="vs-and-location">
-                <p class="vs">VS</p>
-            </div>
-            <div class="away-team-info">
-                <h2 class="away-team">Dallas Mavericks</h2>
-                <img src="images/teamImages/dallasMavericks.jpeg" alt="Dallas Mavericks">
-            </div>
-        </div>
-        <div class="location-and-time">
-            <p class="location">American Airlines Center, Dallas, TX</p>
-            <p class="time">18:00x</p>
-        </div>
-    </div>
-    <div class="enclosure">
-        <h1 class="date">Saturday, December 8th</h1>
-        <div class="basketball-schedule">
-            <div class="home-team-info">
-                <h2 class="home-team">Sacramento Kings</h2>
-                <img class="home-team-image" src="images/teamImages/sacramentoKings.jpeg" alt="Houston Rockets">
-            </div>
-            <div class="vs-and-location">
-                <p class="vs">VS</p>
-            </div>
-            <div class="away-team-info">
-                <h2 class="away-team">Indiana Pacers</h2>
-                <img src="images/teamImages/indianaPacers.jpeg" alt="Dallas Mavericks">
-            </div>
-        </div>
-        <div class="location-and-time">
-            <p class="location">Bankers Life Fieldhouse, Indianapolis, IN</p>
-            <p class="time">19:00</p>
-        </div>
-    </div>
+        <!-- <div class="enclosure">
+            <i data-id="" class="close">x</i>
+                <h1 class="date">Saturday, December 8th</h1>
+                <div class="basketball-schedule">
+                    <div class="home-team-info">
+                        <h2 class="home-team">Houston Rockets</h2>
+                        <img class="home-team-image" src="images/teamImages/houstonRockets.jpeg" alt="Houston Rockets">
+                    </div>
+                    <div class="vs-and-location">
+                        <p class="vs">VS</p>
+                    </div>
+                    <div class="away-team-info">
+                        <h2 class="away-team">Dallas Mavericks</h2>
+                        <img src="images/teamImages/dallasMavericks.jpeg" alt="Dallas Mavericks">
+                    </div>
+                </div>
+                <div class="location-and-time">
+                    <p class="location">American Airlines Center, Dallas, TX</p>
+                    <p class="time">18:00</p>
+                </div>
+            </div> -->
+
+   
 </div>
 
 
@@ -107,21 +88,34 @@
         background-color: #F7B632;
         padding: 5px 0 5px 25px;
     }
-    .location {
-        margin-right: 2vw;
-    }
-    .time {
-        margin-left: 2vh;
-    }
+
     .location-and-time {
         display: flex;
         flex-direction: row;
         justify-content: center;
-        margin-bottom: 3vh;
+        margin-bottom: 10px;
     }
     .enclosure {
-        border: 1px solid #efefef;
+        border: 1px solid #d3d3d3;
+        margin-bottom: 15px;
+        position: relative;
     }
+    
+    .enclosure i.close{
+        position: absolute;
+        padding:2px 5px;
+        background-color:red;
+        color:white;
+        font-size:11px;
+        right:0; top:0;
+        display: none;
+        cursor: pointer;
+    }
+    <% if(data =='admin'){ %>
+    .enclosure:hover i.close{
+        display: block;
+    }
+    <% } %>
     .vs-and-location {
         display: flex;
         flex-direction: column;
@@ -132,15 +126,15 @@
     .vs {
         display: flex;
         align-items: center;
-        margin: 0vw 16vw;
-        font-size: 5vh;
+        margin: 0 150px;
+        font-size: 25px;
     }
 
     .basketball-schedule {
         display: flex;
         flex-direction: row;
         justify-content: center;
-        margin-top: 3vh;
+        margin-top: 10px;
     }
 
     .home-team-info {
@@ -148,14 +142,20 @@
         flex-direction: column;
         justify-content: flex-start;
     }
-
+    .home-team{
+        text-align:center;
+       
+    }
+    .home-team,.away-team{
+        text-transform: capitalize;
+    }
     .away-team-info {
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
     }
 
-    img {
+    .enclosure img {
         width: 250px;
         height: 250px;
     }
@@ -264,63 +264,87 @@
         padding: 15px;
         margin-top:25px;
     }
+    @media screen and (max-width: 1150px) {
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        table {
+            width: 100%;
+        }
+        #teamform div {
+            width: 100%;
+        }
+        .floatLeft {
+            margin-left: 0;
+        }
+}
 </style>
 <script type="text/javascript">
     (function(){
         //deleteing
         <% if(data =='admin'){ %>
-        $('#fild_data').on('click','.team>i',function(e){
-            var id = $(this).data('val');
+        $('#fild_data').on('click','.enclosure>i',function(e){
+            $('#loading').show();
+            var id = $(this).data('id');
             var ths = $(this);
             $.ajax({
-                url: "/teams/"+id,
+                url: "/schedule/"+id,
                 type: "DELETE",        
                 contentType: 'json',
                 success: function(res) {
-                    ths.parent('div.team').remove();
+                    ths.parent('div.enclosure').remove();
+                    setTimeout(function(){  $('#loading').hide();  }, 800);
                 },
                 error: function(jqXHR, textStatus, errorMessage) {
+                    setTimeout(function(){  $('#loading').hide();  }, 800);
                     
                 }
 
             });
         });
-        $('#fild_data').on('click','.team >  p >i.edit',function(e){
-            console.log('clicked');
-            $(this).siblings('span').attr('contenteditable',true);
-            $(this).siblings('span').focus();
+        // $('#fild_data').on('click','.team >  p >i.edit',function(e){
+        //     console.log('clicked');
+        //     $(this).siblings('span').attr('contenteditable',true);
+        //     $(this).siblings('span').focus();
             
-        });
-        $('#fild_data').on('focusout','.team >  p span ',function(e){
-            $(this).attr('contenteditable',false).focus();
-            var cls = $(this).parent('p').attr('class');
-            console.log(cls);
+        // });
+        // $('#fild_data').on('focusout','.team >  p span ',function(e){
+        //     $(this).attr('contenteditable',false).focus();
+        //     var cls = $(this).parent('p').attr('class');
+        //     console.log(cls);
 
 
-        });
+        // });
         $('#teamform').submit(function(e){
             e.preventDefault();    
             let data = $(this).serialize();
-              
-               $.ajax({
-                   url: "schedule/create",
-                   type: "POST",
-                   data: data,                  
-                //    contentType: 'json',
-                //    dataType:'application/json',
-                  
-                   success: function(response) {
-                    getteam();
-                        console.log(response);
-                   },
-                   error: function(jqXHR, textStatus, errorMessage) {
-                       
-                   }
-       
-               });
+                if($('select[name=team1]').val()== $('select[name=team2]').val()){
+                    alert('Same Team');
+                }else{
+                    $.ajax({
+                        url: "schedule/create",
+                        type: "POST",
+                        data: data,                  
+                        //    contentType: 'json',
+                        //    dataType:'application/json',
+                        
+                        success: function(response) {
+                                getteam();
+                            
+                        },
+                        error: function(jqXHR, textStatus, errorMessage) {
+                            
+                        }
+            
+                    });
+
+                }
+             
         });
         <% } %>
         function getteam(){
+            $('#loading').show();
             $.ajax({
                 url: "/schedule/get",
                 type: "GET",        
@@ -330,28 +354,47 @@
                     let ele = "";
                 if(res.length > 0){
                     res.forEach(function(el){
-                        ele += '<div class="schedule"><p><i data-id="'+el._id+'">x</i>';
-                        ele += '<span class="nm">'+el.team1.name+'</span>';
-                        ele += '<span class="imgs"><img src="'+el.team1.imgLink+'"> </span>';
-                        ele += '<span class="cl">:</span>'
-                        ele += '<span class="imgs"><img src="'+el.team2.imgLink+'"></span>';
-                        ele += '<span class="nm">'+el.team2.name+'</span>';
-                        ele += '</p>';
-                        ele += '<p class="dtl">'+el.dateTime+' , '+el.location+'</p></div>';
+
+                        ele += '<div class="enclosure">';
+                        ele += '<i data-id="'+el._id+'" class="close">x</i>';
+                        ele += '<h1 class="date">'+el.dateTime+'</h1>';
+                        ele += '<div class="basketball-schedule">';
+                        ele += '<div class="home-team-info">';
+                        ele += '<h2 class="home-team">'+el.team1.name+'</h2>';
+                        ele += '<img class="home-team-image" src="'+el.team1.imgLink+'" alt="Houston Rockets">';
+                        ele += '</div>';
+                        ele += '<div class="vs-and-location">';
+                        ele += '<p class="vs">VS</p>';
+                        ele += '</div>';
+                        ele += '<div class="away-team-info">';
+                        ele += '<h2 class="away-team">'+el.team2.name+'</h2>';
+                        ele += '<img src="'+el.team2.imgLink+'" alt="Dallas Mavericks">';
+                        ele += '</div>';
+                        ele += '</div>';
+                        ele += '<div class="location-and-time">';
+                        ele += ' <p class="location">'+el.location+'</p>';
+                        // ele += ' <p class="time">18:00</p>';
+                        ele += '</div>';
+                        ele += '</div>';
+                       
+                        
+
+
 
 
                     });
                     $('#fild_data').empty().append(ele);
+                   
                 }
-                
+                setTimeout(function(){  $('#loading').hide();  }, 800);
                 },
                 error: function(jqXHR, textStatus, errorMessage) {
-                    
+                    setTimeout(function(){  $('#loading').hide();  }, 800);
                 }
 
             });
         }
-        // getteam();
+        getteam();
 
 
 

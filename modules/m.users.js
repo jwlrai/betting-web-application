@@ -85,10 +85,10 @@ module.exports = {
         });
     },
     editUser : function(obj,cb){
-       
+        var updateObj = {};
         if(obj.type== 'email' || obj.type =='password' || obj.type=='fund'){
             bcrypt.compare(obj.oldpassword, obj.hashPassword, (err, res)=> {
-                var updateObj = {};
+                
                 if(err){
                     cb(err,null);
                 }else{                    
