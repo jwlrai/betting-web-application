@@ -15,6 +15,8 @@ if(db.betting != undefined){
     db.betting.remove({});
 }
 
+
+
 db.group.create([{
         name: 'admin',
         description:'system admin with all the privileges'
