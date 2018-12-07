@@ -5,7 +5,7 @@
             <option value="enable"> Enabled </option>
             <option value="disable"> Disabled </option>
         </select></p>
-        <p class="floatRight" id="srt"> <span class="prev">< Previous</span> | <span class="nxt">next ></span>        </p>
+        <!-- <p class="floatRight" id="srt"> <span class="prev">< Previous</span> | <span class="nxt">next ></span>        </p> -->
     </div>
     <div id="fild_data" class="clearFix">
         
@@ -15,6 +15,7 @@
 
     </div>
 <style>
+
     #fields >div{
         margin:15px 0;
     }
@@ -70,7 +71,6 @@
         /* opacity: .2;; */
     }
     .status > p{
-       
         position: absolute;
         top:30%;
         display:block;
@@ -114,16 +114,34 @@
     }
     #fild_data{
         border:1px solid #bababa;
-      
         padding:15px;
-       
     }
+
+@media screen and (max-width: 1150px) {
+    .prev{
+        padding-left:10px;
+    }
+    #fild_data {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+}
+
+@media screen and (max-width: 527px) {
+    #fild_data {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
 </style>
 <script type="text/javascript">
 
 
 (function(){
-   
+
     var userlist = {
         option: {
             'enable' : 'disable',

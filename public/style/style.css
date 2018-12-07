@@ -5,10 +5,10 @@
 }
 
 html,body{
-    width:100%;
+    width: 100vw;
     min-height: 100vh;
     font-family: 'Roboto', sans-serif;
-    position: relative;
+    overflow: scroll;
 }
 .floatLeft{
     float:left;
@@ -47,16 +47,33 @@ html,body{
     background-image: linear-gradient(to bottom, #fafbfc, #cde0ee);
     background-repeat: repeat-x;
     background-size: 110% 110%;
-    width:auto !important;
+    width: auto !important;
     font-family: 'Roboto', sans-serif;
+    margin-left: 0.3vw;
 }
 .btnmain{
-    background-color: #eff3f6;
+    /* background-color: #eff3f6;
     background-image: -webkit-linear-gradient(top, #fafbfc, #a83535);
-    background-image: -moz-linear-gradient(top, #fafbfc, #a83535); /*e4ebf0*/
+    background-image: -moz-linear-gradient(top, #fafbfc, #a83535);
     background-image: linear-gradient(to bottom, #fafbfc, #a83535);
-    background-repeat: repeat-x;
+    background-repeat: repeat-x; */
+    background: #F7B632;
+    color: black;
+    width: 100%;
 }
+.reset {
+    background: #F7B632;
+    color: black;
+    margin-right: 0 !important;
+    width: 60%;
+}
+.buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: auto;
+}
+
 .inp{
     border-color: #bdc7d8;
 border-radius: 3px;
@@ -64,6 +81,7 @@ margin: 0;
 color: #262728;
 border: 1px solid #bdc7d8;
 }
+
 
 a{
     text-decoration: none;
@@ -92,9 +110,14 @@ body>header >div h1 a{
 }
 body>header >div input{
     padding:.3em .8em;
-    margin-left:10px !important;
+    margin-left:10px;
     height: 28px;
 }
+
+.inp {
+    margin-left: 0.5vw;
+}
+
 body>header >div button{
     padding:.4em 1em;
     height: 28px;
@@ -158,7 +181,7 @@ h2{
 }
 .lgt-sec-sgn form input{
     padding:.6em 1em;
-    width:300px;
+    width: 27em;
     margin-bottom:10px;
 }
 
@@ -215,8 +238,8 @@ nav > ul>li:last-child ul{
     display: none;
 }
 nav > ul>li:last-child:hover ul{
- display: block;
-   
+    display: block;
+
 }
 nav > ul>li:last-child ul li{
     padding:6px 15px;
@@ -226,4 +249,103 @@ nav > ul>li:last-child ul li{
 }
 nav > ul>li:hover> a,nav > ul>li>ul li:hover a{
     color:#7571eb;
+}
+
+@media screen and (max-width: 1150px) {
+    .top {
+        display: flex;
+        flex-direction: row;
+    }
+    .container {
+        width: 100%;
+    }
+    .harry {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+    }
+    form {
+        margin-right: 2vw;
+        box-sizing: border-box;
+    }
+    .lgt-sec-abt {
+        margin: 0 1vw;
+        width: 95%;
+    }
+    .lgt {
+        display: flex;
+        flex-direction: column-reverse;
+        /* margin-left: 1vw; */
+    }
+    .lgt-sec-sgn {
+        display: flex;
+        flex-direction: column;
+    }
+    .lgt-sec-abt {
+        width: 90vw;
+        padding-left: 2vw;
+
+    }
+    .foam {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        width: 100vw;
+    }
+    .foamy {
+        width: 100vw;
+    }
+    /* p {
+        width: 100%;
+    } */
+    .buttons {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .reset {
+        margin-right: 0 !important;
+    }
+
+}
+
+@media screen and (max-width: 527px) {
+    .harry {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    form {
+        display: flex;
+        flex-direction: column;
+        /* align-items: center; */
+        width: 100%;
+
+    }
+    .password {
+        margin: 5px 0;
+    }
+    .btn {
+        width: 100%;
+    }
+    .email {
+        margin-left: 0;
+    }
+    .floatRight {
+        /* width: 100%; */
+        padding: 0 2vw;
+    }
+    .lgt-sec-sgn form input {
+        /* width: 35em; */
+    }
+    #devo {
+        /* display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: auto; */
+    }
+
 }
