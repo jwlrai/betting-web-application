@@ -18,3 +18,4 @@ module.exports = {
     matches : matches,
     bettingHistory : bettingHistory
 }
+
