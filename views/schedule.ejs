@@ -309,23 +309,29 @@
         $('#teamform').submit(function(e){
             e.preventDefault();    
             let data = $(this).serialize();
-              
-               $.ajax({
-                   url: "schedule/create",
-                   type: "POST",
-                   data: data,                  
-                //    contentType: 'json',
-                //    dataType:'application/json',
-                  
-                   success: function(response) {
-                        getteam();
-                       
-                   },
-                   error: function(jqXHR, textStatus, errorMessage) {
-                       
-                   }
-       
-               });
+                if($('select[name=team1]').val()== $('select[name=team2]').val()){
+                    alert('Same Team');
+                }else{
+                   
+                    $.ajax({
+                        url: "schedule/create",
+                        type: "POST",
+                        data: data,                  
+                        //    contentType: 'json',
+                        //    dataType:'application/json',
+                        
+                        success: function(response) {
+                                getteam();
+                            
+                        },
+                        error: function(jqXHR, textStatus, errorMessage) {
+                            
+                        }
+            
+                    });
+
+                }
+             
         });
         <% } %>
         function getteam(){

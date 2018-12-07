@@ -136,7 +136,8 @@ module.exports = {
                 
                 data.forEach(element => {
                     const userId = element.userId;
-                    const amount = element.amount*ratio;
+                    const amount = (element.amount*ratio) + (parseFloat(element.amount));
+                   
                     
                     db.users.findById(userId, (err, wdata) => {
                         if (err) {

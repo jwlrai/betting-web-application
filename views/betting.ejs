@@ -362,12 +362,13 @@
             e.preventDefault();
             <% if(data=='admin'){ %>
                 var poolId = $(this).data('id');
-               
+                var ths = $(this);
                
                 $.ajax({
                     url: "betting/setwinner/"+poolId,
                     type: "PUT",                    
                     success: function(response) {
+                        ths.parents('div.betting-page').remove();
                         // polamt.text(parseFloat(response.amount));
                         console.log(response);
                             // getteam();
