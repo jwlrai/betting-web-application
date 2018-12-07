@@ -1,4 +1,4 @@
-(function(jq){
+
 
     $(document).ready(function(e){
         $('nav li a').click(function(e){
@@ -50,4 +50,3 @@
         // });
     });
     
-})();

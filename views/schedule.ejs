@@ -322,7 +322,7 @@
 }
 </style>
 <script type="text/javascript">
-    (function(){
+    // (function(){
         //deleteing
         <% if(data =='admin'){ %>
         $('#fild_data').on('click','.enclosure>i',function(e){
@@ -371,7 +371,7 @@
                         //    dataType:'application/json',
                         
                         success: function(response) {
-                                getteam();
+                                getteams();
                             
                         },
                         error: function(jqXHR, textStatus, errorMessage) {
@@ -384,7 +384,7 @@
              
         });
         <% } %>
-        function getteam(){
+        function getteams(){
             $('#loading').show();
             $.ajax({
                 url: "/schedule/get",
@@ -435,7 +435,7 @@
 
             });
         }
-        getteam();
+        getteams();
 
 
 
@@ -457,5 +457,5 @@
 
 
 
-    })();
+    // })();
 </script>
