@@ -289,8 +289,9 @@
                         ele += '</div>';
                     });
                     $('#fild_data').empty().append(ele);
-                    setTimeout(function(){  $('#loading').hide();  }, 800);
+                   
                 }
+                setTimeout(function(){  $('#loading').hide();  }, 800);
                 
                 },
                 error: function(jqXHR, textStatus, errorMessage) {

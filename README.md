@@ -8,7 +8,7 @@
     Express Js  
     Bordy-parser  
     cookie-parser  
-    Multar  
+    Multer  
     Bycript   
     Jquery  
     Jsonwebtoken (JWT)  

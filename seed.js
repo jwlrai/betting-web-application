@@ -1,8 +1,18 @@
 const db =  require('./models');
 const bcrypt = require('bcrypt');
 if(db.group != undefined && db.users != undefined){
-    db.group.drop();
-    db.users.drop();
+    db.group.remove({});
+    db.users.remove({});
+}
+if(db.schedule != undefined){
+    db.schedule.remove({});
+}
+
+if(db.teams != undefined){
+    db.teams.remove({});
+}
+if(db.betting != undefined){
+    db.betting.remove({});
 }
 
 db.group.create([{
