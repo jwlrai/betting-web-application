@@ -2,51 +2,53 @@
 <div id="team">
     <h3>Create Schedule</h3>
     <form id="teamform" class="clearFix">
-        <div class="floatingLeft">
-            <table>
-                <tr>
-                    <td>Home Team </td>
-                    <td> 
-                        <select name="team1" class="inp" >
-                            <% if(team.length > 0){ 
-                                team.forEach(function(ele){
-                            %>
-                            <option  value="<%- ele._id %>"><%- ele.name %></option>
-                            <%   }); } %>
-                        </select>
-                        <!-- <input list="teamslist" class="inp" autocomplete="off" type="text" name="team1" /> -->
-                    </td>
-                </tr>
-                <tr>
-                    <td>Date</td>
-                    <td> <input class="inp" autocomplete="off" type="text" name="dateTime" /></td>
-                </tr>
-            </table>
-        </div>
-        <div class="floatRight">
-            <table>
-                <tr>
-                    <td>Away Team </td>
-                    <td> 
-                        <select name="team2" class="inp" >
-                            <% if(team.length > 0){ 
-                                team.forEach(function(ele){
-                            %>
-                            <option  value="<%- ele._id %>"><%- ele.name %></option>
-                            <%   }); } %>
-                        </select>
-                        <!-- <input  list="teamslist"class="inp" autocomplete="off" type="text" name="team2" /> -->
-                    </td>
-                </tr>
-                <tr>
-                    <td>Location</td>
-                    <td> <input class="inp" autocomplete="off" type="text" name="location" /></td>
-                </tr>
-            </table>
-            <p>
-                <input type="reset" value="Reset" class="btn"/> 
-                <input type="submit" value="Submit" class="btn btnmain"/>
-            </p>
+        <div class="coat">
+            <div class="floatingLeft">
+                <table class="table1">
+                    <tr>
+                        <td>Home Team </td>
+                        <td> 
+                            <select name="team1" class="inp" >
+                                <% if(team.length > 0){ 
+                                    team.forEach(function(ele){
+                                %>
+                                <option  value="<%- ele._id %>"><%- ele.name %></option>
+                                <%   }); } %>
+                            </select>
+                            <!-- <input list="teamslist" class="inp" autocomplete="off" type="text" name="team1" /> -->
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Date</td>
+                        <td> <input class="inp" autocomplete="off" type="text" name="dateTime" /></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="floatingRight">
+                <table class="table2">
+                    <tr>
+                        <td>Away Team </td>
+                        <td> 
+                            <select name="team2" class="inp" >
+                                <% if(team.length > 0){ 
+                                    team.forEach(function(ele){
+                                %>
+                                <option  value="<%- ele._id %>"><%- ele.name %></option>
+                                <%   }); } %>
+                            </select>
+                            <!-- <input  list="teamslist"class="inp" autocomplete="off" type="text" name="team2" /> -->
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Location</td>
+                        <td> <input class="inp" autocomplete="off" type="text" name="location" /></td>
+                    </tr>
+                </table>
+                <p>
+                    <input type="reset" value="Reset" class="btn"/> 
+                    <input type="submit" value="Submit" class="btn btnmain"/>
+                </p>
+            </div>
         </div>
 
     </form>   
@@ -81,6 +83,20 @@
 
 
 <style>
+    .floatingLeft {
+        width: 45%;
+    }
+    .floatingRight {
+        width: 45%;
+    }
+    .coat {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    #floatingLeft {
+        margin-right: 0;
+    }
     .away-team {
         text-align: center;
     }
@@ -123,17 +139,21 @@
         justify-content: center;
     }
 
+    .location {
+        text-align: center;
+    }
+
     .vs {
         display: flex;
-        align-items: center;
-        margin: 0 150px;
+        align-items: center !important;
+        margin: 0 auto;
         font-size: 25px;
     }
 
     .basketball-schedule {
         display: flex;
         flex-direction: row;
-        justify-content: center;
+        justify-content: space-between;
         margin-top: 10px;
     }
 
@@ -229,9 +249,9 @@
     #teamform{
         width:100%;
     }
-    #teamform div{
-        width:50%;
-    }
+    /* #teamform div{
+        width:40%;
+    } */
     #teamform > div table{
         width:100%;
     }
@@ -278,6 +298,27 @@
         .floatLeft {
             margin-left: 0;
         }
+        .vs {
+        /* margin: 0 50px;
+        text-align: center; */
+
+    }
+    @media screen and (max-width: 527px) {
+        .coat {
+            display: flex;
+            flex-direction: column;
+        }
+        .enclosure img {
+        width: 100%;
+        height: auto;
+        }
+        .home-team {
+            font-size: 20px;
+        }
+        .away-team {
+            font-size: 20px;
+        }
+    }
 }
 </style>
 <script type="text/javascript">
