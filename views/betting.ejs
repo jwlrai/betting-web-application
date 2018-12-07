@@ -108,12 +108,10 @@
         justify-content: flex-end;
     }
     .topbar {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
         background-color: black;
         color:#F7B632;
-        font-size: 1.5vh;
+        font-size: 17px;
+        text-align: center;
     }
     form {
         display: flex;
@@ -135,14 +133,14 @@
     font-size:24px;
 }
     ::-webkit-input-placeholder {
-    font-size: 4vh;
+    font-size: 25px;
     text-align: center;
-    padding: 1vh 1vw;
+    padding: 5px;
     font-style: italic;
 }
     .poolpot {
         border: 2px solid black;
-        height: 10vh;
+        height: 65px;
         width: 100%;
         background-color: #F7B632;
         /* margin-bottom: 1vh; */
@@ -155,14 +153,14 @@
 
     button {
         border: 2px solid black;
-        height: 7vh;
+        height: 50px;
         width: 100%;
         background-color: #F7B632;
         font-size: 24px;
-        margin-bottom: 5vh;
+        margin-bottom: 50px;
     }
     .stake {
-        height: 5vh;
+        height: 35px;
         width: 100%;
         border: 2px solid transparent;
         margin-top: 0;
@@ -184,18 +182,18 @@
         text-align: center;
         color: #F7B632;
     }
-    .location {
+    /* .location {
         margin-right: 2vw;
-    }
-    .time {
+    } */
+    /* .time {
         margin-left: 2vh;
-    }
-    .location-and-time {
+    } */
+    /* .location-and-time {
         display: flex;
         flex-direction: row;
         justify-content: center;
         margin-bottom: 3vh;
-    }
+    } */
     .enclosure {
         border: 1px solid #efefef;
     }
@@ -209,22 +207,22 @@
     .vs {
         display: flex;
         align-items: center;
-        margin: 0vw 10vh;
-        font-size: 5vh;
+        margin: 0 50px;
+        font-size: 40px;
     }
 
     .basketball-schedule {
         display: flex;
         flex-direction: row;
         justify-content: center;
-        margin-top: 3vh;
+        margin-top: 30px;
     }
 
     .home-team-info {
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
-        width: 20vw;
+        width: 350px;
     }
 
     .away-team-info {
@@ -232,7 +230,7 @@
         flex-direction: column;
         justify-content: flex-end;
         align-items: flex-end;
-        width: 20vw;
+        width: 350px;
     }
 
     img {
@@ -253,6 +251,16 @@
         border: 1px solid #bababa;
         padding: 15px;
         margin-top:25px;
+    }
+    @media screen and (max-width: 1150px) {
+        .topbar {
+            font-size: 12px;
+        }
+    }
+    @media screen and (max-width: 527px) {
+    .vs {
+        margin: 0 15px;
+    }
     }
 </style>
 <script type="text/javascript">

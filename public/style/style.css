@@ -297,9 +297,9 @@ nav > ul>li:hover> a,nav > ul>li>ul li:hover a{
     .foamy {
         width: 100vw;
     }
-    p {
+    /* p {
         width: 100%;
-    }
+    } */
     .buttons {
         display: flex;
         flex-direction: row;
@@ -334,7 +334,7 @@ nav > ul>li:hover> a,nav > ul>li>ul li:hover a{
         margin-left: 0;
     }
     .floatRight {
-        width: 100%;
+        /* width: 100%; */
         padding: 0 2vw;
     }
     .lgt-sec-sgn form input {
