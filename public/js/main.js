@@ -1,6 +1,6 @@
 
 
-    $(document).ready(function(e){
+    // $(document).ready(function(e){
         $('nav li a').click(function(e){
             e.preventDefault();
             var page = $(this).attr('href');
@@ -20,7 +20,7 @@
                 });
             }
            
-        });
+        // });
 
         // sending image to server
         // jq('#formstest').submit(function(e){
