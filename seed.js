@@ -38,7 +38,5 @@ db.group.create([{
                     
                 }
             });
-           
-           
         }
 );
