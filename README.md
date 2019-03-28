@@ -1,5 +1,9 @@
 # Web Betting Application 
 
+
+![bettingweb](https://user-images.githubusercontent.com/42447565/55149423-0b40d380-5142-11e9-9963-518d4e195312.jpeg)
+
+
 ## Technologies and framework  used
 
     NodeJS  
